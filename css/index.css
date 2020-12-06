@@ -1,0 +1,620 @@
+* {
+  padding: 0;
+}
+
+/*Section Menu */
+.MenuComponent {
+  width: 100%;
+  height: max-content;
+}
+.teste {
+  background: url("../img/fundo1.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
+}
+.teste nav {
+  display: flex;
+  justify-content: flex-end;
+  padding: 2em;
+}
+.teste nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.teste nav ul a {
+  position: relative;
+  display: inline-block;
+  margin: 0px 10px;
+  padding: 5px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 14px;
+}
+.cadastro {
+  border: 2px solid #fff;
+  border-radius: 30px;
+}
+
+.txtHeader {
+  margin: 90px 50px;
+  color: white;
+  width: 50%;
+}
+
+.txtHeader {
+  text-align: left;
+  margin-bottom: 50px;
+}
+input {
+  width: 80%;
+  height: 30px;
+  border: 1px solid #daeeeb;
+  border-radius: 50px;
+  font-family: Poppins, sans-serif;
+}
+
+button {
+  margin-top: 50px;
+  font-family: Poppins, sans-serif;
+  text-align: center;
+  height: 30px;
+  width: 130px;
+  background-color: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 50px;
+  transition: all 0.3s ease 0s;
+}
+
+@media all and (max-width: 800px) {
+  ul {
+    flex-grow: 1;
+    justify-content: space-around;
+  }
+}
+
+@media all and (max-width: 730px) {
+  ul {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .teste {
+    background-image: none;
+    background-color: #78baae;
+    width: 100%;
+    height: max-content;
+  }
+
+  .txtHeader {
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding-bottom: 50px;
+  }
+
+  .txt-header {
+    text-align: center;
+    width: 100%;
+  }
+}
+/*Section Menu */
+
+/*Section Bem vindo */
+.WelcomeComponent {
+  width: 100%;
+  height: max-content;
+}
+
+.WelcomeComponent div {
+  text-align: center;
+  margin-top: 50px;
+}
+.WelcomeComponent div p {
+  color: #8f9896;
+}
+.WelcomeComponent h2 {
+  color: #78baae;
+  font-size: 2rem;
+}
+.WelcomeComponent hr {
+  width: 10%;
+  color: #78baae;
+}
+.WelcomeComponent .p-txt {
+  color: #8f9896;
+  padding: 0px 40px;
+}
+
+.flexWelcome {
+  display: flex;
+  justify-content: center;
+}
+
+.flexWelcome div {
+  display: flex;
+  flex-direction: column;
+  margin: 50px;
+  font-weight: bolder;
+}
+
+.flexWelcome div p {
+  color: #36a699;
+  font-size: 25px;
+}
+
+@media screen and (max-width: 768px) {
+  .flexWelcome {
+    flex-direction: column;
+  }
+}
+/*Section Bem Vindo */
+
+/*Section Diferencial */
+.DifferenceComponent {
+  width: 100%;
+  height: max-content;
+  background-color: #36a699;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 0;
+}
+.conteudo {
+  width: 100%;
+  height: max-content;
+  flex-direction: column;
+}
+.txt-porque {
+  font-size: 1rem;
+  text-align: center;
+}
+.conteudo h2 {
+  font-size: 2rem;
+  text-align: center;
+  color: #fff;
+}
+
+.conteudo hr {
+  width: 10%;
+  color: #78baae;
+}
+
+.txt-porque2 {
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 20px 80px;
+  color: #fff;
+}
+.row {
+  display: grid;
+  width: 100%;
+  padding: 80px 20px;
+  box-sizing: border-box;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  height: max-content;
+}
+
+.row .card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: max-content;
+  padding: 30px 30px;
+  box-sizing: border-box;
+  transition: 0.3s ease-in-out;
+  text-align: center;
+  justify-content: center;
+}
+.row .card p {
+  display: flex;
+  font-size: 1rem;
+  justify-content: center;
+  color: white;
+}
+
+.row .card:hover {
+  box-shadow: 5px 5px 12px 5px rgba(0, 0, 0, 0.5);
+  background-color: #333;
+  color: #fff;
+}
+
+.row .card img {
+  height: 50px;
+  transition: 0.3s ease-in-out;
+  padding: 30px;
+}
+
+.row .card p {
+  font-size: 1.3rem;
+}
+
+.row .card:hover i {
+  color: #fff;
+}
+
+@media screen and (max-width: 1000px) {
+  .row {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    padding: 40px 10px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .row {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    padding: 40px 10px;
+  }
+  .row .card {
+    padding: 30px 0px;
+  }
+}
+/*Section Diferencial */
+
+/*Section Nosso Tratamentos */
+.KnowComponent {
+  width: 100%;
+  height: max-content;
+  background-color: #fff;
+}
+
+.wrapper h2 {
+  color: #78baae;
+  font-size: 2rem;
+  padding: 20px 20px;
+}
+
+.img-area {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.single-img {
+  padding: 0 20px 20px;
+}
+.single-img img {
+  width: 310px;
+  height: 400px;
+}
+
+.single-img img:hover {
+  opacity: 0.8;
+  transition: 0.7s;
+  cursor: pointer;
+}
+/*Section Nosso Tratamentos */
+
+/*Section Unidades */
+.UnidadeComponent {
+  width: 100%;
+  height: max-content;
+  background-color: #36a699;
+}
+
+.head-unidade {
+  padding-top: 30px;
+  text-align: center;
+}
+.head-unidade p {
+  color: #fff;
+  font-size: 1.2rem;
+}
+.head-unidade h2 {
+  color: #fff;
+  font-size: 2rem;
+}
+
+.head-unidade hr {
+  width: 10%;
+  color: #fff;
+}
+
+.div-unidade {
+  width: 100%;
+  display: flex;
+  text-align: center;
+  justify-content: space-around;
+}
+
+.txt-unidade {
+  width: 40%;
+}
+
+.txt-unidade h2 {
+  color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+  .div-unidade {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .txt-unidade {
+    padding-top: 50px;
+    width: 100%;
+  }
+}
+/*Section Unidades */
+
+/*Section Blog Home */
+.BlogComponent {
+  height: max-content;
+}
+
+.blog-title p {
+  margin-top: 40px;
+  color: #8f9896;
+  text-align: center;
+  font-size: 1.2rem;
+}
+.blog-title h2 {
+  color: #78baae;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.blog {
+  height: max-content;
+  align-items: center;
+  justify-content: center;
+  padding: 0 80px;
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.blog-post {
+  width: 100%;
+  max-width: 60rem;
+  padding: 4rem;
+  background-color: white;
+  box-shadow: 0 1.4rem 8rem rgb(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  border-radius: 0.8rem;
+}
+
+.blog-post_img {
+  min-width: 35rem;
+  margin-right: 10px;
+  max-width: 35rem;
+  height: 30rem;
+  position: relative;
+}
+
+.blog-post_img img {
+  width: 80%;
+  height: 80%;
+  object-fit: cover;
+  display: block;
+  border-radius: 0.8rem;
+}
+
+.blog-post_date span {
+  display: block;
+  color: rgb(0, 0, 0, 0.5);
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: 0.5rem 0;
+}
+
+.blog-post_title {
+  font-size: 2rem;
+  margin: 1.5rem 0 2rem;
+  text-transform: uppercase;
+  color: #76b7ab;
+}
+
+.blog-post_text {
+  margin-bottom: 3rem;
+}
+.blog-post_cta {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 1rem 3rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #fff;
+  background-image: linear-gradient(to right, #76b7ab 0%, #36a699 100%);
+  border-radius: 0.8rem;
+  text-decoration: none;
+}
+
+.blog-post_cta:hover {
+  background-image: linear-gradient(to right, #36a699 0%, #76b7ab 100%);
+}
+
+@media screen and (max-width: 1000px) {
+  .blog-post {
+    padding: 2.5rem;
+    flex-direction: column;
+  }
+  .blog-post_img {
+    min-width: 100%;
+    min-width: 100%;
+  }
+}
+/*blog */
+
+/*footer*/
+
+.footer-distributed {
+  background: #76b7ab;
+  box-sizing: border-box;
+  width: 100%;
+  text-align: left;
+  padding: 55px 50px;
+}
+
+.footer-distributed .footer-left,
+.footer-distributed .footer-center,
+.footer-distributed .footer-right {
+  display: inline-block;
+  vertical-align: top;
+}
+
+/* Footer left */
+
+.footer-distributed .footer-left {
+  width: 40%;
+}
+
+/* The company logo */
+
+.footer-distributed h3 {
+  color: #ffffff;
+  margin: 0;
+}
+
+.footer-distributed h3 span {
+  color: lightseagreen;
+}
+
+/* Footer links */
+
+.footer-distributed .footer-links {
+  color: #ffffff;
+  margin: 20px 0 12px;
+  padding: 0;
+}
+
+.footer-distributed .footer-links a {
+  display: block;
+  line-height: 1.8;
+  font-weight: 400;
+  text-decoration: none;
+  color: inherit;
+}
+
+.footer-distributed .footer-company-name {
+  color: #222;
+  font-size: 14px;
+  font-weight: normal;
+  margin: 0;
+}
+
+/* Footer Center */
+
+.footer-distributed .footer-center {
+  width: 35%;
+}
+
+.footer-distributed .footer-center i {
+  background-color: #33383b;
+  color: #ffffff;
+  font-size: 25px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 42px;
+  margin: 10px 15px;
+  vertical-align: middle;
+}
+
+.footer-distributed .footer-center i.fa-envelope {
+  font-size: 17px;
+  line-height: 38px;
+}
+
+.footer-distributed .footer-center p {
+  display: inline-block;
+  color: #ffffff;
+  font-weight: 400;
+  vertical-align: middle;
+  margin: 0;
+}
+
+.footer-distributed .footer-center p span {
+  display: block;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 2;
+}
+
+.footer-distributed .footer-center p a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-distributed .footer-links .link-1:before {
+  content: none;
+}
+
+/* Footer Right */
+
+.footer-distributed .footer-right {
+  width: 20%;
+}
+
+.footer-distributed .footer-company-about {
+  line-height: 20px;
+  color: #92999f;
+  font-size: 13px;
+  font-weight: normal;
+  margin: 0;
+}
+
+.footer-distributed .footer-company-about span {
+  display: block;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.footer-distributed .footer-icons {
+  margin-top: 25px;
+}
+
+.footer-distributed .footer-icons a {
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  font-size: 20px;
+  color: #ffffff;
+  text-align: center;
+  line-height: 35px;
+
+  margin-right: 3px;
+  margin-bottom: 5px;
+}
+
+/* If you don't want the footer to be responsive, remove these media queries */
+
+@media (max-width: 880px) {
+  .footer-distributed {
+    font: bold 14px sans-serif;
+  }
+
+  .footer-distributed .footer-left,
+  .footer-distributed .footer-center,
+  .footer-distributed .footer-right {
+    display: block;
+    width: 100%;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+
+  .footer-distributed .footer-center i {
+    margin-left: 0;
+  }
+}

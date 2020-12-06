@@ -1,0 +1,127 @@
+body{
+    height: max-content;
+}
+  
+
+  .return{
+    margin: 10px 10px;
+      font-family: Poppins, sans-serif;
+      text-align: center;
+      height: 30px;
+      width: 25%;
+      color: #36a699;
+      border: 2px solid #36a699;
+      border-radius: 50px;
+      transition: all 0.3s ease 0s;
+  }
+
+  .return  a{
+        text-decoration: none;
+        color: #36a699;
+      }
+  input {
+      width: 80%;
+      height: 30px;
+      border: 1px solid #36a699;
+      border-radius: 50px;
+      font-family: Poppins, sans-serif;
+      display:block;
+      margin: 0 auto;
+      text-align:center;
+    }
+    .blog-title   p {
+      margin-top: 40px;
+      color: #8f9896;
+      text-align: center;
+      font-size: 1.2rem;
+    }
+    .blog-title h2 {
+      color: #78baae;
+      font-size: 2rem;
+      text-align: center;
+    }
+
+  .blog {
+    height: max-content;
+    align-items: center;
+    justify-content: center;
+    padding: 0 80px;
+    display: flex;
+    margin-bottom: 30px;
+    margin-top: 50px;
+  }
+
+  .blog-post {
+    width: 100%;
+    max-width: 60rem;
+    padding: 4rem;
+    background-color: white;
+    box-shadow: 0 1.4rem 8rem rgb(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    border-radius: 0.8rem;
+  }
+
+  .blog-post_img {
+    min-width: 35rem;
+    margin-right: 10px;
+    max-width: 35rem;
+    height: 30rem;
+    position: relative;
+  }
+
+  .blog-post_img img {
+    width: 80%;
+    height: 80%;
+    object-fit: cover;
+    display: block;
+    border-radius: 0.8rem;
+  }
+
+  .blog-post_date span {
+    display: block;
+    color: rgb(0, 0, 0, 0.5);
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin: 0.5rem 0;
+  }
+
+  .blog-post_title {
+    font-size: 2rem;
+    margin: 1.5rem 0 2rem;
+    text-transform: uppercase;
+    color: #76b7ab;
+  }
+
+  .blog-post_text {
+    margin-bottom: 3rem;
+  }
+  .blog-post_cta {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 1rem 3rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #fff;
+    background-image: linear-gradient(to right, #76b7ab 0%, #36a699 100%);
+    border-radius: 0.8rem;
+    text-decoration: none;
+  }
+
+    .blog-post_cta:hover {
+      background-image: linear-gradient(to right, #36a699 0%, #76b7ab 100%);
+    }
+  
+
+  @media screen and (max-width: 1000px) {
+    .blog-post {
+      padding: 2.5rem;
+      flex-direction: column;
+    }
+    .blog-post_img {
+      min-width: 100%;
+      min-width: 100%;
+    }
+  }
+
+

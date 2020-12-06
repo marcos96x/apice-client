@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Ápice Estética Avançada</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/register.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="form">
+        <div class="title">informações Básicas</div>
+        <div class="inputfield">
+          <label>Nome Completo: <span style="color: red">*</span></label>
+          <input required type="text" class="input" placeholder="Informe seu nome completo"/>
+        </div>
+        <div class="inputfield">
+          <label>Data de Nascimento:</label>
+          <input type="date" class="input"  />
+        </div>
+        <div class="inputfield">
+          <label>CPF:</label>
+          <input type="text" class="input" placeholder="Informe seu CPF"/>
+        </div>
+        <div class="inputfield">
+          <label>Telefone:</label>
+          <input type="text" class="input" placeholder="Informe seu telefone"/>
+        </div>
+
+        <div class="inputfield">
+          <label>E-mail:</label>
+          <input type="email" class="input"placeholder="Informe seu e-mail" />
+        </div>
+        <div class="title">informações para Login</div>
+        <div class="inputfield">
+          <label>Login:</label>
+          <input type="text" class="input" placeholder="Informe seu login" />
+        </div>
+        <div class="inputfield">
+          <label>Senha:</label>
+          <input type="password" class="input" placeholder="Informe sua senha" />
+        </div>
+        <div class="inputfield">
+          <label>Confirmar Senha:</label>
+          <input type="password" class="input" placeholder="confirme sua senha" />
+        </div>
+        <div class="inputfield">
+          <input type="submit" value="Register" class="btn" />
+        </div>
+        <div class="msg">
+          <p>Já possui uma conta? <a href="login.html">Entre aqui</a></p>
+        </div>
+        <div class="return">
+          <a href="login.html">Voltar para página inicial</a>
+        </div>
+      </div>
+    </div>
+    <script src="js/register.js"></script>
+  </body>
+  <script>
+    //cpf
+    $("#id_do_campo").mask("999999999-99")
+  </script>
+</html>
