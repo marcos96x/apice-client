@@ -9,35 +9,133 @@
   <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
   <link rel="preconnect" href="https://fonts.gstatic.com" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/login.css" />
+ 
   <link rel="stylesheet" href="css/bootstrap/toast.css" />
+   <link rel="stylesheet" href="css/login.css" />
 </head>
 
 <body>
-  <section class="LoginComponent">
-    <div class="login-page">
-      <div class="form">
 
-        <img src="img/logo apice.png" alt="Icone" />
-        <h2>Bem Vindo!</h2>
-        <span id="errorLogin" style="color: red; display: none;">Login vazio!</span>
-        <input type="text" id="login" placeholder="Login" />
-        <span id="errorSenha"  style="color: red; display: none;">Senha vazia!</span>
-        <input type="password" id="senha" placeholder="Senha">
-        <button onclick="login()">Entrar</button>
-        <p class="message">
-          Não possui conta? <a href="register.html">Cadastre-se</a>
-        </p>
-        <p class="return">
-          <a href="/">Retornar a tela principal</a>
-        </p>
+  <div class="form">
+      
+    <ul class="tab-group">
+      <li class="tab active"><a href="#signup">Cadastre-se</a></li>
+      <li class="tab"><a href="#signin">Entrar</a></li>
+    </ul>
+    
+    <div class="tab-content">
+      <div id="signup">   
+        <h1>Crie uma conta</h1>
+        
+        <div><!--form-->
+          <h3 style="text-align: center;">Informações Básicas</h3>
+          <div class="field-wrap">
+            <label>
+              Nome Completo<span class="req">*</span>
+            </label>
+            <input required type="text" id="usuario_nome" class="input" />
+          </div>
+        <div class="top-row">
+          <div class="field-wrap">
+            <label>
+      <span class="req"></span>
+            </label>
+          <input type="date" class="input" id="usuario_nascimento"  required />
+          </div>
+          <div class="field-wrap">
+            <label>
+              CPF<span class="req">*</span>
+            </label>
+            <input type="text" class="input cpf" id="usuario_cpf" required />
+          </div>
+        </div>
+        <div class="top-row">
+          <div class="field-wrap">
+            <label>
+              E-mail<span class="req">*</span>
+            </label>
+            <input type="email" class="input" id="usuario_email" required/>
+          </div>
+      
+          <div class="field-wrap">
+            <label>
+              Telefone<span class="req">*</span>
+            </label>
+            <input type="text" class="input celular" id="usuario_telefone" required autocomplete="off"/>
+          </div>
+        </div>
+
+        <h3 style="text-align: center;">Informações para Login</h3>
+        <div class="field-wrap">
+          <label>
+            Login<span class="req">*</span>
+          </label>
+          <input type="text" class="input" id="usuario_login" autocomplete="off" required />
+        </div>
+        <div class="top-row">
+          <div class="field-wrap">
+            <label>
+              Senha<span class="req">*</span>
+            </label>
+            <input type="password" class="input" id="usuario_senha" autocomplete="off" required />
+          </div>
+      
+          <div class="field-wrap">
+            <label>
+              Confirmar Senha<span class="req">*</span>
+            </label>
+            <input type="password" class="input" id="usuario_confirma_senha"  required autocomplete="off" />
+          </div>
+        </div>
+        
+        <button type="submit" value="Register" class="button button-block" onclick="cadastrar()">Cadastrar-se</button>
+        
+      </div>
 
       </div>
+
+  
+    <div id="signin"><!--id login-->   
+      <h1>Bem vindo de volta!</h1>
+      
+      <div><!--Form-->
+      
+        <div class="field-wrap">
+        <label>
+          Login<span class="req">*</span>
+        </label>
+        <input type="text" id="login"  required autocomplete="off" />
+
+      </div>
+      
+      <div class="field-wrap">
+        <label>
+          <span id="errorSenha"  style="color: red; display: none;">Senha vazia!</span>
+          Senha<span class="req">*</span>
+        </label>
+        <input type="password" id="senha" required autocomplete="off"/>
+      </div>
+      
+      <p class="forgot"><a href="#">Esqueceu a senha?</a></p>
+      
+      <button class="button button-block" onclick="login()">Entrar</button>
+      
     </div>
-  </section>
-  <script src="./js/jquery/jquery.js"></script>
+
+    </div>
+  </div><!-- tab-content -->
+      
+</div> <!-- /form -->
+
+<script src="./js/jquery/jquery.js"></script>
+<script src="js/jquery/jquery.mask.js"></script>
+<script src="js/scripts/mascaras.js"></script>
+<script src="js/scripts/cpfValidator.js"></script>
   <script src="./js/scripts/toast.js"></script>
+  <script src="./js/scripts/register.js"></script>
   <script src="./js/scripts/login.js"></script>
+
+ 
 </body>
 
 </html>

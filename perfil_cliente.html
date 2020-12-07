@@ -14,64 +14,25 @@
   <title>Sidebar sub menus</title>
 </head>
 
-<div class="row">
-  <div class="col-sm-12 col-md-2 fullHeigth w-100 text-center" style="background-color: rgb(44, 44, 44); z-index: 5;">
-    <br>
-    <div>
-      <img src="./img/download.jpeg" alt="" class="profile-img">
-    </div>
-    <br><br>
-    <ul class="list-group">
-      <li class="list-group-item listas active">Procedimentos</li>
-      <li class="list-group-item listas">Dados</li>
-      <li class="list-group-item listas">Configurações</li>
-    </ul>
-    <ul class="list-group" style="position: absolute; bottom: 0px; width: 100%;">
-      <li class="list-group-item listas">Sair</li>
-    </ul>
+<body>
+  <div class="sidenav">
+    <a href="#about">Perfil</a>
+    <a href="#services">Editar</a>
+    <a href="#clients">Configurações</a>
+    <a onclick="logout()">Sair</a>
   </div>
-  <div class="col-sm-12 col-md-10 fullHeigth">
-    <!-- Menu sup -->
-    <div class="row menuSup w-100">
-      <div class="col-sm-6 col-md-8 align-self-center">
-        <h6>Olá <span id="usuarioNome"></span>, Seja bem vindo!</h6>
-      </div>
-      <div class="col-sm-6 col-md-4">
-        <!-- <button class="btn btn-secondary" style="float: right;">Sair</button> -->
-      </div>
+  
+  <div class="main">
+    <div class="perfil-section">
+      <div>
+      <h2>Sidebar</h2>
+      <h6>Olá <span id="usuarioNome"></span>, Seja bem vindo!</h6>
     </div>
-    <!-- FIm menu sup -->
-    <!-- painel -->
-    <div class="container">
-      <div class="row painelCliente">
-        <div class="col-sm-12 col-md-12" style="padding-left: 50px !important; padding-right: 50px !important;">
-          <br><br>
-          <div class="card">
-            <div class="card-header">
-              Todos os procedimentos
-            </div>
-            <div class="card-body">
-              <table id="procedimentosTable" class="display">
-                <thead>
-                  <tr>
-                    <th>Procedimento</th>
-                    <th>Tipo</th>
-                    <th>Status</th>
-                    <th>Ações</th>
-                  </tr>
-                </thead>
-                <tbody id="linhasProcedimento">
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
+    
+  </div>
+     
 
-    <!-- FIm painel -->
-  </div>
-</div>
 <script src="js/jquery/jquery.js"></script>
 <script src="js/bootstrap/bootstrap.min.js"></script>
 <script src="js/jquery/datatable.js"></script>

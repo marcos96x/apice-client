@@ -47,9 +47,9 @@ $(document).ready(function () {
 });
 
 function getUser() {
-    if (isNaN(id)) {
+    if(!localStorage.getItem('apiceToken')) {
         localStorage.clear()
-        window.location.href = "/index.html"
+        window.location.replace("login.html");
     }
 
     let url = baseUri + "/getUser";
@@ -69,7 +69,7 @@ function getUser() {
         console.log(res)
         if (res.err != undefined) {
             localStorage.clear()
-            window.location.href = "/index.html"
+            window.location.replace("login.html");
         } else {
             $("#usuarioNome").html(res.usuario.usuario_nome)
         }
@@ -77,9 +77,9 @@ function getUser() {
 }
 
 function getProcedimentos() {
-    if (isNaN(id)) {
+    if(!localStorage.getItem('apiceId') && !localStorage.getItem('apiceIToken')) {
         localStorage.clear()
-        window.location.href = "/index.html"
+        window.location.replace("login.html");
     }
 
     let url = baseUri + "/procedimentoCliente/" + id;
@@ -105,6 +105,11 @@ function getProcedimentos() {
     })
 }
 
+
+function logout() {
+    localStorage.removeItem("apiceId");
+    window.location.replace("login.html");
+  }
 
 
 
