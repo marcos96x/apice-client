@@ -10,6 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="css/bootstrap/toast.css" />
     <link rel="stylesheet" href="css/register.css" />
   </head>
   <body>
@@ -17,41 +18,41 @@
       <div class="form">
         <div class="title">informações Básicas</div>
         <div class="inputfield">
-          <label>Nome Completo: <span style="color: red">*</span></label>
-          <input required type="text" class="input" placeholder="Informe seu nome completo"/>
+          <label><span style="color: red">*</span>Nome Completo:</label>
+          <input required type="text" id="usuario_nome" class="input" placeholder="Informe seu nome completo"/>
         </div>
         <div class="inputfield">
-          <label>Data de Nascimento:</label>
-          <input type="date" class="input"  />
+          <label><span style="color: red">*</span>Data de Nascimento:</label>
+          <input type="date" class="input" id="usuario_nascimento"  required/>
         </div>
         <div class="inputfield">
-          <label>CPF:</label>
-          <input type="text" class="input" placeholder="Informe seu CPF"/>
+          <label><span style="color: red">*</span>CPF:</label>
+          <input type="text" class="input cpf" placeholder="Informe seu CPF" id="usuario_cpf" required/>
         </div>
         <div class="inputfield">
-          <label>Telefone:</label>
-          <input type="text" class="input" placeholder="Informe seu telefone"/>
+          <label><span style="color: red">*</span>Telefone:</label>
+          <input type="text" class="input celular" placeholder="Informe seu telefone" id="usuario_telefone" required/>
         </div>
 
         <div class="inputfield">
-          <label>E-mail:</label>
-          <input type="email" class="input"placeholder="Informe seu e-mail" />
+          <label><span style="color: red">*</span>E-mail:</label>
+          <input type="email" class="input"placeholder="Informe seu e-mail" id="usuario_email" required />
         </div>
         <div class="title">informações para Login</div>
         <div class="inputfield">
-          <label>Login:</label>
-          <input type="text" class="input" placeholder="Informe seu login" />
+          <label><span style="color: red">*</span>Login:</label>
+          <input type="text" class="input" placeholder="Informe seu login" id="usuario_login" />
         </div>
         <div class="inputfield">
-          <label>Senha:</label>
-          <input type="password" class="input" placeholder="Informe sua senha" />
+          <label><span style="color: red">*</span>Senha:</label>
+          <input type="password" class="input" placeholder="Informe sua senha" id="usuario_senha" />
         </div>
         <div class="inputfield">
-          <label>Confirmar Senha:</label>
-          <input type="password" class="input" placeholder="confirme sua senha" />
+          <label><span style="color: red">*</span>Confirmar Senha:</label>
+          <input type="password" class="input" placeholder="confirme sua senha" id="usuario_confirma_senha" />
         </div>
         <div class="inputfield">
-          <input type="submit" value="Register" class="btn" />
+          <input type="submit" value="Register" class="btn" onclick="cadastrar()" />
         </div>
         <div class="msg">
           <p>Já possui uma conta? <a href="login.html">Entre aqui</a></p>
@@ -61,10 +62,12 @@
         </div>
       </div>
     </div>
-    <script src="js/register.js"></script>
+    <script src="js/jquery/jquery.js"></script>
+    <script src="js/jquery/jquery.mask.js"></script>
+    <script src="js/scripts/mascaras.js"></script>
+    <script src="js/scripts/cpfValidator.js"></script>
+    <script src="js/scripts/toast.js"></script>
+    <script src="js/scripts/register.js"></script>
+
   </body>
-  <script>
-    //cpf
-    $("#id_do_campo").mask("999999999-99")
-  </script>
 </html>

@@ -1,0 +1,29 @@
+body {
+    overflow-x: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.fullHeigth {
+    height: 100vh !important;
+    padding: 0px !important;    
+}
+
+.listas {
+    background-color: transparent;
+    color: whitesmoke;
+    cursor: pointer;
+}
+
+.listas:hover {
+    background-color: rgba(0, 0, 0, 0.186);
+}
+
+.profile-img {
+    width: 100px;
+    border-radius: 50px;
+}
+
+.menuSup {
+    background-color: rgb(232, 232, 232);
+    padding: 10px;
+    color: rgb(48, 48, 48);
+}
