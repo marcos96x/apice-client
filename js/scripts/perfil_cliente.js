@@ -1,6 +1,10 @@
 const id = localStorage.getItem('apiceId');
 const token = localStorage.getItem('apiceToken');
 $(document).ready(function () {
+    // esconde todas as telas
+    $(".telas").hide();
+    // mostra a tela de procedimentos inicialmente
+    $("#divProcedimentos").show();
     getUser()
     getProcedimentos()
     $('#procedimentosTable').DataTable({
@@ -47,7 +51,7 @@ $(document).ready(function () {
 });
 
 function getUser() {
-    if(!localStorage.getItem('apiceToken')) {
+    if (!localStorage.getItem('apiceToken')) {
         localStorage.clear()
         window.location.replace("login.html");
     }
@@ -77,7 +81,7 @@ function getUser() {
 }
 
 function getProcedimentos() {
-    if(!localStorage.getItem('apiceId') && !localStorage.getItem('apiceIToken')) {
+    if (!localStorage.getItem('apiceId') && !localStorage.getItem('apiceIToken')) {
         localStorage.clear()
         window.location.replace("login.html");
     }
@@ -90,9 +94,9 @@ function getProcedimentos() {
     }).done(res => {
         console.log(res)
         let procedimentos = res.procedimentos;
-        if(procedimentos.length > 0) {
+        if (procedimentos.length > 0) {
             procedimentos.map(procedimento => {
-                $("#linhasProcedimento").append(`
+                $("#linhasProcedimentos").append(`
                 <td>${procedimento.procedimento_titulo}</td>
                 <td>${procedimento.procedimento_tipo}</td>
                 <td>${procedimento.procedimento_status}</td>
@@ -107,9 +111,26 @@ function getProcedimentos() {
 
 
 function logout() {
-    localStorage.removeItem("apiceId");
+    localStorage.clear();
     window.location.replace("login.html");
-  }
+}
+
+function switchTelas(id) {
+
+    // esconde todas as telas
+    $(".telas").hide();
+    // mostra a tela desejada
+    $("#div" + id).show();
+
+    // remove a class active de todos os menu
+    $(".listas").removeClass('active');
+    // Insere a class active no menu selecionado
+    $("#nav" + id).addClass('active');
+
+
+
+
+}
 
 
 
