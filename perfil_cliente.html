@@ -6,12 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- ===== CSS ===== -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
   <link rel="stylesheet" href="css/datatable/datatable.css">
 
-  <link rel="stylesheet" href="css/perfil.css">
+  <link rel="stylesheet" href="css/perfil_cliente.css">
 
-  <title>Sidebar sub menus</title>
+  <title>Meu Perfil</title>
 </head>
 
 <div class="row">
@@ -21,6 +22,7 @@
       <img src="./img/download.jpeg" alt="" class="profile-img">
     </div>
     <br><br>
+    <p style="color: white;">Ficha </p>
     <ul class="list-group">
       <li class="list-group-item listas active" id="navProcedimentos" onclick="switchTelas('Procedimentos')">Procedimentos</li>
       <li class="list-group-item listas" id="navDados" onclick="switchTelas('Dados')">Dados</li>
@@ -32,18 +34,16 @@
   </div>
   <div class="col-sm-12 col-md-10 fullHeigth">
     <!-- Menu sup -->
-    <div class="row menuSup w-100">
-      <div class="col-sm-6 col-md-8 align-self-center">
-        <h6>Olá <span id="usuarioNome"></span>, Seja bem vindo!</h6>
-      </div>
-      <div class="col-sm-6 col-md-4">
-        <!-- <button class="btn btn-secondary" style="float: right;">Sair</button> -->
-      </div>
-    </div>
     <!-- FIm menu sup -->
     <!-- painel -->
     <div class="container">
+  
       <div class="telas" id="divProcedimentos">
+        <div class="row menuSup w-100">
+          <div class="col-sm-6 col-md-8 align-self-center">
+            <h6>Olá <span class="usuarioNome"></span>, Seja bem vindo!</h6>
+          </div>
+        </div>
         <div class="row painelCliente">
           <div class="col-sm-12 col-md-12" style="padding-left: 50px !important; padding-right: 50px !important;">
             <br><br>
@@ -70,13 +70,70 @@
           </div>
         </div>
       </div>
-      <div class="telas" id="divDados">
-        <h1>Div de dados</h1>
+      <div class="telas editar_cliente" id="divDados">
+        <div class="p-3">
+          <h5 class="text-center mt-3"><span class="usuarioNome" style="color: green;"></span>,</h5>
+          <h3 class="text-center mt-3">aqui estão os dados da sua conta</h3>
+          <div class="modal-body p-5">
+            <div class="form-group">
+              <label for="procedimento_titulo">Nome completo</label>
+              <input type="text" id="usuario_nome" class="form-control">
+            </div>
+            <div class="row pt-2">
+              <div class="col-sm-12 col-md-6">
+                <label for="procedimento_desc">CPF</label>
+                <input type="text" id="usuario_cpf" class="form-control">
+              </div>
+              <div class="col-sm-12 col-md-6">
+                <label for="procedimento_titulo">Data de nascimento</label>
+                <input type="date" id="usuario_nascimento" class="form-control">
+              </div>
+            </div>
+    
+            <div class="row pt-2">
+              <div class="col-sm-12 col-md-6">
+                <label for="procedimento_titulo">Email</label>
+                <input type="email" id="usuario_email" class="form-control">
+              </div>
+              <div class="col-sm-12 col-md-6">
+                <label for="procedimento_desc">Telefone</label>
+                <input type="text" id="usuario_telefone" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer p-4">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-success" onclick="registerCliente()">Salvar</button>
+          </div>
+        </div>
       </div>
       <div class="telas" id="divConfiguracao">
-        <h1>Div de config</h1>
+       
+        <div class="config-tela">
+          <h2 class="text-center pt-5 pb-5">Configurações Gerais</h2>
+          <div class="modal-flex">
+
+          <div class="modal-body">
+            <h4 class="text-center pt-3">Alterar Senha</h4>
+            <p class="text-center">Você pode alterar sua <span style="color: orange; font-weight: bold;">SENHA</span> quando quiser</p>
+            <div class="text-center">
+              <hr>
+            <button type="button" class="btn btn-warning text-center" onclick="">Alterar Senha</button>
+          </div>
+          </div>
+          <div class="modal-body">
+            <h4 class="text-center pt-3">Desativar conta</h4>
+            <p class="text-center">Sua conta será <span style="color: red; font-weight: bold;">Desativada</span> e só poderá ser ativada novamente entrando em contato com o suporte</p>
+            <div class="text-center">
+              <hr>
+            <button type="button" class="btn btn-danger text-center" onclick="">Desativar Conta</button>
+          </div>
+          </div>
+          
+          </div>
+        </div>
       </div>
-      
+  
     </div>
 
     <!-- FIm painel -->

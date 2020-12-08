@@ -107,8 +107,8 @@ function getProcedimentos() {
                 <td>${procedimento.procedimento_status}</td>
                 <td>${procedimento.usuario_nome}</td>
                 <td>
-                  <button class="btn btn-primary btn-sm">Editar</button>
-                  <button class="btn btn-danger btn-sm">Remover</button>
+                  <button class="btn btn-primary btn-sm" onclick="$('#modalEditProcedimento').modal('show')">Editar</button>
+                  <button class="btn btn-danger btn-sm" onclick="$('#modalRemoveProcedimento').modal('show')">Remover</button>
                 </td>
                 </tr>
                 `)
@@ -140,8 +140,9 @@ function getClientes() {
                 <td>${cliente.usuario_status}</td>
                 <td>${cliente.usuario_procedimentos}</td>
                 <td>
-                  <button class="btn btn-primary btn-sm">Editar</button>
-                  <button class="btn btn-danger btn-sm">Remover</button>
+                  <button class="btn btn-primary btn-sm"   onclick="$('#modalEditCliente').modal('show')">Editar</button>
+                  <button class="btn btn-warning btn-sm" onclick="$('#modalDesativeCliente').modal('show')">Desativar</button>
+                  <button class="btn btn-danger btn-sm" onclick="$('#modalRemoveCliente').modal('show')">Remover</button>
                 </td>
                 </tr>
                 `);
@@ -177,8 +178,9 @@ function getPrestadores() {
                     <td>${prestador.usuario_email}</td>
                     <td>${prestador.usuario_status}</td>
                     <td>
-                      <button class="btn btn-primary btn-sm">Editar</button>
-                      <button class="btn btn-danger btn-sm">Remover</button>
+                      <button class="btn btn-primary btn-sm" onclick="$('#modalEditPrestador').modal('show')">Editar</button>
+                      <button class="btn btn-warning btn-sm" onclick="$('#modalDesativePrestador').modal('show')">Desativar</button>
+                      <button class="btn btn-danger btn-sm" onclick="$('#modalRemovePrestador').modal('show')">Remover</button>
                     </td>
                     </tr>
                     `)
@@ -212,8 +214,8 @@ function getBlog() {
                     <td>${blog.blog_data}</td>
                     <td>${blog.blog_home}</td>
                     <td>
-                      <button class="btn btn-primary btn-sm">Editar</button>
-                      <button class="btn btn-danger btn-sm">Remover</button>
+                      <button class="btn btn-primary btn-sm" onclick="$('#modalEditBlog').modal('show')">Editar</button>
+                      <button class="btn btn-danger btn-sm"  onclick="$('#modalRemoveBlog').modal('show')">Remover</button>
                     </td>
                     </tr>
                     `)
@@ -223,6 +225,86 @@ function getBlog() {
 
     })
 }
+
+function setBlog(){
+    let titulo = $("#blog_titulo").val().trim();
+    let desc = $("#blog_desc").val().trim();
+    let desc_full = $("#blog_desc_full").val().trim();
+    let home = $("#blog_home").val().trim();
+    if (titulo == '') {
+        $.toast({
+            heading: "Campo obrigatório vazio!",
+            text: "Campo de título do procedimento vazio!",
+            icon: "danger",
+            loader: true, // Change it to false to disable loader
+            loaderBg: "#ff0000", // To change the background
+        });
+    }
+        
+    else if (desc == '')
+        $.toast({
+            heading: "Campo obrigatório vazio!",
+            text: "Campo de descrição do procedimento vazio!",
+            icon: "danger",
+            loader: true, // Change it to false to disable loader
+            loaderBg: "#ff0000", // To change the background
+        });
+    else if (desc_full == '')
+        $.toast({
+            heading: "Campo obrigatório vazio!",
+            text: "Campo de tipo do procedimento vazio!",
+            icon: "danger",
+            loader: true, // Change it to false to disable loader
+            loaderBg: "#ff0000", // To change the background
+        });
+    else if (home == '')
+        $.toast({
+            heading: "Campo obrigatório vazio!",
+            text: "Campo de Cliente do procedimento vazio!",
+            icon: "danger",
+            loader: true, // Change it to false to disable loader
+            loaderBg: "#ff0000", // To change the background
+        });
+    else {
+        // salva o procedimento
+        let url = baseUri + "/blog";
+        $.ajax({
+            url: url,
+            method: 'POST',
+            contentType: 'application/JSON',
+            beforeSend: function(xhr){
+                xhr.setRequestHeader('Authorization', token)
+            },
+            data: JSON.stringify({
+                blog: {
+                    titulo: titulo,
+                    desc: desc,
+                    desc_full: desc_full,
+                    home: home
+                },
+                
+            })
+        }).done(res => {
+            if (res.err == undefined) {
+                $("#modalAddBlog").modal('hide');
+                $.toast({
+                    heading: "Blog cadastrado com sucesso!",
+                    text: "",
+                    icon: "danger",
+                    loader: true, // Change it to false to disable loader
+                    loaderBg: "#00FF00", // To change the background
+                });
+                getBlog();
+                $("#blog_titulo").val('');
+                $("#blog_desc").val('');
+                $("#blog_desc_full").val('');
+                $("#blog_home").val('');
+            }
+    
+        })
+    }
+}
+
 
 function setProcedimento() {
     let titulo = $("#procedimento_titulo").val().trim();
@@ -302,6 +384,9 @@ function setProcedimento() {
         })
     }
 }
+
+
+  
 
 
 function logout() {

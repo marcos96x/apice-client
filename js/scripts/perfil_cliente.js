@@ -75,7 +75,7 @@ function getUser() {
             localStorage.clear()
             window.location.replace("login.html");
         } else {
-            $("#usuarioNome").html(res.usuario.usuario_nome)
+            $(".usuarioNome").html(res.usuario.usuario_nome)
         }
     })
 }
@@ -97,13 +97,16 @@ function getProcedimentos() {
         if (procedimentos.length > 0) {
             procedimentos.map(procedimento => {
                 $("#linhasProcedimentos").append(`
+                <tr>
                 <td>${procedimento.procedimento_titulo}</td>
                 <td>${procedimento.procedimento_tipo}</td>
                 <td>${procedimento.procedimento_status}</td>
                 <td>
                   <button class="btn btn-primary btn-sm">Visualizar</button>
                 </td>
+                <tr>
                 `)
+            
             })
         }
     })

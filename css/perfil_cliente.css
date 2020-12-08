@@ -1,0 +1,81 @@
+*{
+    font-family: 'Poppins', sans-serif;
+  }
+  body {
+    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif;
+  }
+  .fullHeigth {
+    height: 100vh !important;
+    padding: 0px !important;  
+    width: 100%;  
+  }
+  
+  .listas {
+    background-color: transparent;
+    color: whitesmoke;
+    cursor: pointer;
+  }
+  
+  .listas:hover {
+    background-color: rgba(0, 0, 0, 0.186);
+  }
+  
+  .profile-img {
+    width: 100px;
+    border-radius: 50px;
+  }
+  
+  .menuSup {
+    background-color: rgb(232, 232, 232);
+    padding: 10px;
+    color: rgb(48, 48, 48);
+    margin-right: 0; 
+    margin-left: 0;
+  }
+  .p-center{
+    text-align: center;
+  }
+  
+  .container{
+        padding-left: 0;
+        padding-right: 0;
+  }
+  
+  #divDados{
+    background-image: linear-gradient(rgba(0,0,0, 0.7), rgba(0,0,0,0.7)), url("../img/pexels-sohail-na-807598.jpg");
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  #divDados .p-3{
+    background-color: white;
+    width: 75%;
+    height: max-content;
+  }
+  
+  #divConfiguracao{
+    background-image: linear-gradient(rgba(0,0,0, 0.7), rgba(0,0,0,0.7)), url("../img/pexels-sohail-na-807598.jpg");
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  #divConfiguracao .config-tela{
+    background-color: white;
+    width: 75%;
+    min-height: 70vh;
+  
+   
+  }
+
+  .modal-flex{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  }
