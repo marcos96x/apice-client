@@ -111,7 +111,7 @@ function getProcedimentos() {
 
 
 function logout() {
-    localStorage.clear();
+    localStorage.clear("apiceId");
     window.location.replace("login.html");
 }
 

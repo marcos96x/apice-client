@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ===== CSS ===== -->
+  <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="css/datatable/datatable.css">
+  <link rel="stylesheet" href="css/bootstrap/toast.css" />
+  <link rel="stylesheet" href="css/perfil.css">
+
+  <title>Painel Administrativo</title>
+</head>
+
+<div class="row">
+  <div class="col-sm-12 col-md-2 fullHeigth w-100 text-center" style="background-color: rgb(44, 44, 44); z-index: 5;">
+    <br>
+    <div>
+      <img src="./img/download.jpeg" alt="" class="profile-img">
+    </div>
+    <br><br>
+    <ul class="list-group">
+      <li class="list-group-item listas active" id="navDashboard" onclick="switchTelas('Dashboard')">Dashboard</li>
+      <li class="list-group-item listas" id="navProcedimentos" onclick="switchTelas('Procedimentos')">Procedimentos</li>
+
+      <li class="list-group-item listas" id="navClientes" onclick="switchTelas('Clientes')">Clientes</li>
+      <li class="list-group-item listas" id="navPrestadores" onclick="switchTelas('Prestadores')">Prestadores</li>
+      <li class="list-group-item listas" id="navBlog" onclick="switchTelas('Blog')">Blog</li>
+    </ul>
+    <ul class="list-group" style="position: absolute; bottom: 0px; width: 100%;">
+      <li class="list-group-item listas" onclick="logout()">Sair</li>
+    </ul>
+  </div>
+  <div class="col-sm-12 col-md-10 fullHeigth">
+    <!-- Menu sup -->
+    <div class="row menuSup w-100">
+      <div class="col-sm-6 col-md-8 align-self-center">
+        <h6>Olá <span id="usuarioNome"></span>, Seja bem vindo!</h6>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <!-- <button class="btn btn-secondary" style="float: right;">Sair</button> -->
+      </div>
+    </div>
+    <!-- FIm menu sup -->
+    <!-- painel -->
+    <div class="container">
+      <div class="telas" id="divDashboard">
+        <h1>Div de dashboard</h1>
+      </div>
+      <div class="telas" id="divProcedimentos">
+        <div class="row painelCliente">
+          <div class="col-sm-12 col-md-12" style="padding-left: 50px !important; padding-right: 50px !important;">
+            <br><br>
+            <div class="card">
+              <div class="card-header">
+                <h3>Todos os procedimentos <button class="btn btn-success" style="float: right;"
+                    onclick="$('#modalAddProcedimento').modal('show')">Adicionar</button></h3>
+
+              </div>
+              <div class="card-body">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th scope="col">Procedimento</th>
+                      <th scope="col">Tipo</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Cliente</th>
+                      <th scope="col">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody id="linhasProcedimentos">
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="telas" id="divClientes">
+        <div class="row painelCliente">
+          <div class="col-sm-12 col-md-12" style="padding-left: 50px !important; padding-right: 50px !important;">
+            <br><br>
+            <div class="card">
+              <div class="card-header">
+                <h3>Todos os clientes <button class="btn btn-success" style="float: right;"
+                    onclick="$('#modalAddCliente').modal('show')">Adicionar</button></h3>
+
+              </div>
+              <div class="card-body">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th scope="col">Nome</th>
+                      <th scope="col">Ficha</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Procedimentos</th>
+                      <th scope="col">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody id="linhasClientes">
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="telas" id="divPrestadores">
+        <div class="row painelCliente">
+          <div class="col-sm-12 col-md-12" style="padding-left: 50px !important; padding-right: 50px !important;">
+            <br><br>
+            <div class="card">
+              <div class="card-header">
+                <h3>Todos os prestadores <button class="btn btn-success" style="float: right;"
+                    onclick="$('#modalAddPrestadores').modal('show')">Adicionar</button></h3>
+
+              </div>
+              <div class="card-body">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th scope="col">Nome</th>
+                      <th scope="col">E-mail</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody id="linhasPrestadores">
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="telas" id="divBlog">
+        <div class="row painelCliente">
+          <div class="col-sm-12 col-md-12" style="padding-left: 50px !important; padding-right: 50px !important;">
+            <br><br>
+            <div class="card">
+              <div class="card-header">
+                <h3>Todos os posts do Blog <button class="btn btn-success" style="float: right;"
+                    onclick="$('#modalAddBlog').modal('show')">Adicionar</button></h3>
+
+              </div>
+              <div class="card-body">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th scope="col">Título</th>
+                      <th scope="col">Data</th>
+                      <th scope="col">Aparece na home</th>
+                      <th scope="col">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody id="linhasBlog">
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- FIm painel -->
+
+    <!-- modais -->
+    <div class="modal fade" id="modalAddProcedimento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Adicionar procedimento</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-sm-12 col-md-6">
+                <label for="procedimento_titulo">Título</label>
+                <input type="text" id="procedimento_titulo" class="form-control">
+              </div>
+              <div class="col-sm-12 col-md-6">
+                <label for="procedimento_desc">Descrição</label>
+                <input type="text" id="procedimento_desc" class="form-control">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-6">
+                <label for="procedimento_titulo">Tipo</label>
+                <select type="text" id="procedimento_tipo" class="form-control">
+                  <option value="1">Tipo 1</option>
+                  <option value="2">Tipo 2</option>
+                </select>
+              </div>
+              <div class="col-sm-12 col-md-6">
+                <label for="procedimento_cliente">Cliente</label>
+                <select type="text" id="procedimento_cliente" class="form-control">
+                  <option>Selecione um cliente</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary" onclick="setProcedimento()">Salvar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- fim modais -->
+  </div>
+</div>
+<script src="js/jquery/jquery.js"></script>
+<script src="js/bootstrap/bootstrap.min.js"></script>
+<script src="js/jquery/datatable.js"></script>
+<script src="js/scripts/toast.js"></script>
+<script src="js/scripts/perfil_admin.js"></script>
+
+</body>
+
+</html>
