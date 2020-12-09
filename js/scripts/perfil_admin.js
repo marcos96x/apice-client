@@ -4,7 +4,7 @@ const token = localStorage.getItem('apiceToken');
 var blog_id = null;
 var procedimento_id = null;
 var prestador_id = null;
-var usuario_id = null;
+var cliente_id = null;
 
 $(document).ready(function () {
     if (!localStorage.getItem('apiceId') && !localStorage.getItem('apiceIToken')) {
@@ -14,7 +14,7 @@ $(document).ready(function () {
     // esconde todas as telas
     $(".telas").hide();
     // mostra a tela de procedimentos inicialmente
-    $("#divDashboard").show();
+    $("#divClientes").show();
     getUser()
     getProcedimentos()
     getClientes()
@@ -93,7 +93,7 @@ function getUser() {
     })
 }
 
-function getProcedimentos() {    
+function getProcedimentos() {
 
     let url = baseUri + "/procedimento";
     $.ajax({
@@ -106,7 +106,7 @@ function getProcedimentos() {
         $("#linhasProcedimentos").html('');
         if (procedimentos.length > 0) {
             procedimentos.map(procedimento => {
-                if(procedimento.procedimento_status == 1) {
+                if (procedimento.procedimento_status == 1) {
                     button = `<button class="btn btn-warning btn-sm" onclick="showChangeStatusProcedimento('0', '${procedimento.procedimento_id}')">Desativar</button>`;
                 } else {
                     button = `<button class="btn btn-success btn-sm" onclick="showChangeStatusProcedimento('1', '${procedimento.procedimento_id}')">Ativar</button>`;
@@ -158,8 +158,8 @@ function showChangeStatusProcedimento(status, id) {
                 icon: "success",
                 loader: true, // Change it to false to disable loader
                 loaderBg: "#00ff00", // To change the background
-            });            
-            
+            });
+
             getProcedimentos();
         }
     });
@@ -241,13 +241,14 @@ function getClientes() {
     }).done(res => {
         console.log(res)
         let usuarios = res.usuarios;
+        $("#linhasClientes").html('');
         if (res.err == undefined) {
-            $("#linhasClientes").html('');
+
             var button;
             if (usuarios.length > 0) {
                 usuarios.map(usuario => {
-                    
-                    if(usuario.usuario_status == 1) {
+
+                    if (usuario.usuario_status == 1) {
                         button = `<button class="btn btn-warning btn-sm" onclick="showChangeStatusCliente('0', '${usuario.usuario_id}')">Desativar</button>`;
                     } else {
                         button = `<button class="btn btn-success btn-sm" onclick="showChangeStatusCliente('1', '${usuario.usuario_id}')">Ativar</button>`;
@@ -259,7 +260,7 @@ function getClientes() {
                     <td>${usuario.usuario_status_nome}</td>
                     <td>${usuario.usuario_procedimentos}</td>
                     <td>
-                      <button class="btn btn-primary btn-sm" onclick="showEditCliente(${usuario.usuario_id}, '${usuario.usuario_nome}', '${usuario.usuario_ficha}', '${usuario.usuario_cpf}', '${usuario.usuario_nascimento}', '${usuario.usuario_telefone}')">Editar</button>
+                      <button class="btn btn-primary btn-sm" onclick="showEditCliente(${usuario.usuario_id}, '${usuario.usuario_nome}', '${usuario.usuario_ficha}', '${usuario.usuario_cpf}', '${usuario.usuario_nascimento}', '${usuario.usuario_email}', '${usuario.usuario_telefone}', '${usuario.usuario_login}')">Editar</button>
                       ${button}
                       <button class="btn btn-danger btn-sm" onclick="showRemoverCliente(${usuario.usuario_id})">Remover</button>
                     </td>
@@ -277,73 +278,63 @@ function setCliente() {
     let validator = true;
     let idCampoVazio = "";
     $(".inputCliente").each(function () {
-      if ($(this).val().trim() == "") {
-        validator = false;
-        idCampoVazio = $(this).attr("id");
-        return false;
-      }
-    });
-  
-    if (!validator) {
-      $.toast({
-        heading: "Campo obrigatório inválido!",
-        text: "Preencha o campo obrigatório",
-        icon: "danger",
-        loader: true, // Change it to false to disable loader
-        loaderBg: "#ff0000", // To change the background
-      });
-      $("#" + idCampoVazio).focus();
-    } else if (
-      $("#usuario_senha").val().trim() !=
-      $("#usuario_confirma_senha").val().trim()
-    ) {
-      $.toast({
-        heading: "Senhas diferentes!",
-        text: "Suas senhas não estão iguais",
-        icon: "danger",
-        loader: true, // Change it to false to disable loader
-        loaderBg: "#ff0000", // To change the background
-      });
-    } 
-    
-    else if (
-        $("#usuario_ficha").val().trim() === $(this).attr("id")) {
-        $.toast({
-          heading: "Senhas diferentes!",
-          text: "Suas senhas não estão iguais",
-          icon: "danger",
-          loader: true, // Change it to false to disable loader
-          loaderBg: "#ff0000", // To change the background
-        });
-      }else {
-      // cadastra
-      let dados = [];
-      $(".inputCliente").each(function () {
-        if ($(this).attr("id") != "usuario_confirma_senha") {
-          dados.push($(this).val().trim());
+        if ($(this).val().trim() == "") {
+            validator = false;
+            idCampoVazio = $(this).attr("id");
+            return false;
         }
-      });
-      console.log(dados);
-      let url = baseUri + "/register";
-      let data = {
-        usuario: {
-          login: dados[6],
-          senha: dados[7],
-          nome: dados[0],
-          cpf: dados[2],
-          nascimento: dados[3],
-          telefone: dados[4],
-          email: dados[5],
-          ficha: dados[1],
-        },
-      };
-      let method = 'POST';
+    });
+    if ($("#usuario_senha").val() == '' && cliente_id != null)
+        validator = true;
+    if (!validator) {
+        $.toast({
+            heading: "Campo obrigatório inválido!",
+            text: "Preencha o campo obrigatório",
+            icon: "danger",
+            loader: true, // Change it to false to disable loader
+            loaderBg: "#ff0000", // To change the background
+        });
+        $("#" + idCampoVazio).focus();
+    } else if (
+        $("#usuario_senha").val().trim() !=
+        $("#usuario_confirma_senha").val().trim()
+    ) {
+        $.toast({
+            heading: "Senhas diferentes!",
+            text: "Suas senhas não estão iguais",
+            icon: "danger",
+            loader: true, // Change it to false to disable loader
+            loaderBg: "#ff0000", // To change the background
+        });
+    } else {
+        // cadastra
+        let dados = [];
+        $(".inputCliente").each(function () {
+            if ($(this).attr("id") != "usuario_confirma_senha") {
+                dados.push($(this).val().trim());
+            }
+        });
+        console.log(dados);
+        let url = baseUri + "/register";
+        let data = {
+            usuario: {
+                usuario_login: dados[6],
+                usuario_senha: dados[7],
+                usuario_nome: dados[0],
+                usuario_cpf: dados[2],
+                usuario_nascimento: dados[3],
+                usuario_telefone: dados[4],
+                usuario_email: dados[5],
+                usuario_ficha: dados[1],
+            },
+        };
+        let method = 'POST';
         let msg = "Cadastro";
-        if(usuario_id != null) {
-            if($("#usuario_senha").val() == '') {
+        if (cliente_id != null) {
+            if ($("#usuario_senha").val() == '') {
                 data.usuario.usuario_senha = undefined;
             }
-            data.usuario.usuario_id = usuario_id;
+            data.usuario.usuario_id = cliente_id;
             method = 'PUT';
             msg = "Alteração";
             url = baseUri + "/user"
@@ -358,7 +349,7 @@ function setCliente() {
             if (res.err != undefined) {
                 // show erro
                 $.toast({
-                    heading: "Erro de "+msg+"!",
+                    heading: "Erro de " + msg + "!",
                     text: res.err,
                     icon: "danger",
                     loader: true, // Change it to false to disable loader
@@ -379,12 +370,12 @@ function setCliente() {
         });
     }
 }
-  function showRemoverCliente(id) {
+function showRemoverCliente(id) {
     $('#modalRemoveCliente').modal('show');
     usuario_id = id;
-} 
+}
 
-  function removeCliente() {
+function removeCliente() {
     if (usuario_id != null) {
         $.ajax({
             url: baseUri + "/user",
@@ -408,7 +399,7 @@ function setCliente() {
                     loader: true, // Change it to false to disable loader
                     loaderBg: "#00FF00", // To change the background
                 });
-                $("#modalRemoveCliente").modal('hide')
+                $("#modalRemoveCliente").modal('hide');
                 getClientes();
             } else {
                 $.toast({
@@ -453,8 +444,8 @@ function showChangeStatusCliente(status, id) {
                 icon: "success",
                 loader: true, // Change it to false to disable loader
                 loaderBg: "#00ff00", // To change the background
-            });            
-            
+            });
+
             getClientes();
         }
     });
@@ -463,23 +454,24 @@ function showChangeStatusCliente(status, id) {
 function showAddCliente() {
     $(".inputCliente").val('');
     $('#modalAddCliente').modal('show');
-    usuario_id = null;
+    cliente_id = null;
 }
 
-function showEditCliente(id, nome, cpf, nascimento, email, telefone, ficha) {
-    
+function showEditCliente(id, nome, ficha, cpf, nascimento, email, telefone, login) {
+    alert(ficha);
     $('#modalAddCliente').modal('show');
-    usuario_id = id;
+    cliente_id = id;
     $("#usuario_nome").val(nome);
     $("#usuario_ficha").val(ficha);
     $("#usuario_cpf").val(cpf);
     $("#usuario_nascimento").val(nascimento);
     $("#usuario_telefone").val(telefone);
     $("#usuario_email").val(email);
-    
+    $("#usuario_login").val(login);
+
 
 }
-  
+
 
 function getPrestadores() {
     if (!localStorage.getItem('apiceId') && !localStorage.getItem('apiceIToken')) {
@@ -500,8 +492,8 @@ function getPrestadores() {
             var button;
             if (prestadores.length > 0) {
                 prestadores.map(prestador => {
-                    
-                    if(prestador.usuario_status == 1) {
+
+                    if (prestador.usuario_status == 1) {
                         button = `<button class="btn btn-warning btn-sm" onclick="showChangeStatusPrestador('0', '${prestador.usuario_id}')">Desativar</button>`;
                     } else {
                         button = `<button class="btn btn-success btn-sm" onclick="showChangeStatusPrestador('1', '${prestador.usuario_id}')">Ativar</button>`;
@@ -553,9 +545,9 @@ function removePrestador() {
                     icon: "danger",
                     loader: true, // Change it to false to disable loader
                     loaderBg: "#00FF00", // To change the background
-                   
+
                 }
-                ); 
+                );
 
                 getPrestadores()
             } else {
@@ -567,7 +559,7 @@ function removePrestador() {
                     loaderBg: "#00FF00", // To change the background
                 });
             }
-           
+
         })
     }
 }
@@ -601,8 +593,8 @@ function showChangeStatusPrestador(status, id) {
                 icon: "success",
                 loader: true, // Change it to false to disable loader
                 loaderBg: "#00ff00", // To change the background
-            });            
-            
+            });
+
             getPrestadores();
         }
     });
@@ -615,7 +607,7 @@ function showAddPrestador() {
 }
 
 function showEditPrestador(id, nome, email, tipo, login) {
-    
+
     $('#modalAddPrestador').modal('show');
     prestador_id = id;
     $("#usuario_nome_prestador").val(nome);
@@ -636,7 +628,7 @@ function setPrestador() {
         }
     });
 
-    if($("#usuario_senha_prestador").val() == '' && prestador_id != null)
+    if ($("#usuario_senha_prestador").val() == '' && prestador_id != null)
         validator = true;
     if (!validator) {
         $.toast({
@@ -679,8 +671,8 @@ function setPrestador() {
         };
         let method = 'POST';
         let msg = "Cadastro";
-        if(prestador_id != null) {
-            if($("#usuario_senha_prestador").val() == '') {
+        if (prestador_id != null) {
+            if ($("#usuario_senha_prestador").val() == '') {
                 data.usuario.usuario_senha = undefined;
             }
             data.usuario.usuario_id = prestador_id;
@@ -698,7 +690,7 @@ function setPrestador() {
             if (res.err != undefined) {
                 // show erro
                 $.toast({
-                    heading: "Erro de "+msg+"!",
+                    heading: "Erro de " + msg + "!",
                     text: res.err,
                     icon: "danger",
                     loader: true, // Change it to false to disable loader
@@ -959,7 +951,7 @@ function setProcedimento() {
                 procedimento_cliente: cliente
             },
         }
-        if(procedimento_id != null) {
+        if (procedimento_id != null) {
             method = "PUT";
             msg = "alterado";
             dados.procedimento.procedimento_id = procedimento_id;
@@ -976,7 +968,7 @@ function setProcedimento() {
             if (res.err == undefined) {
                 $("#modalAddProcedimento").modal('hide');
                 $.toast({
-                    heading: "Procedimento "+ msg +" com sucesso!",
+                    heading: "Procedimento " + msg + " com sucesso!",
                     text: "",
                     icon: "danger",
                     loader: true, // Change it to false to disable loader

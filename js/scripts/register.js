@@ -98,13 +98,13 @@ function cadastrar() {
     let url = baseUri + "/register";
     let data = {
       usuario: {
-        login: dados[5],
-        senha: dados[6],
-        nome: dados[0],
-        cpf: dados[2],
-        nascimento: dados[1],
-        telefone: dados[3],
-        email: dados[4],
+        usuario_login: dados[5],
+        usuario_senha: dados[6],
+        usuario_nome: dados[0],
+        usuario_cpf: dados[2],
+        usuario_nascimento: dados[1],
+        usuario_telefone: dados[3],
+        usuario_email: dados[4],
       },
     };
     $.ajax({
