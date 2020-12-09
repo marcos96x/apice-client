@@ -4,6 +4,7 @@ const token = localStorage.getItem('apiceToken');
 var blog_id = null;
 var procedimento_id = null;
 var prestador_id = null;
+var usuario_id = null;
 
 $(document).ready(function () {
     if (!localStorage.getItem('apiceId') && !localStorage.getItem('apiceIToken')) {
@@ -239,30 +240,246 @@ function getClientes() {
         contentType: 'application/JSON'
     }).done(res => {
         console.log(res)
-        let clientes = res.usuarios;
-        if (clientes.length > 0) {
-            clientes.map(cliente => {
-                $("#linhasClientes").append(`
-                <tr>
-                <td>${cliente.usuario_nome}</td>
-                <td>${cliente.usuario_ficha}</td>
-                <td>${cliente.usuario_status}</td>
-                <td>${cliente.usuario_procedimentos}</td>
-                <td>
-                  <button class="btn btn-primary btn-sm"   onclick="$('#modalEditCliente').modal('show')">Editar</button>
-                  <button class="btn btn-warning btn-sm" onclick="$('#modalDesativeCliente').modal('show')">Desativar</button>
-                  <button class="btn btn-danger btn-sm" onclick="$('#modalRemoveCliente').modal('show')">Remover</button>
-                </td>
-                </tr>
-                `);
-
-                $("#procedimento_cliente").append(`
-                    <option value="${cliente.usuario_id}">${cliente.usuario_nome}</option>
-                `)
-            })
+        let usuarios = res.usuarios;
+        if (res.err == undefined) {
+            $("#linhasClientes").html('');
+            var button;
+            if (usuarios.length > 0) {
+                usuarios.map(usuario => {
+                    
+                    if(usuario.usuario_status == 1) {
+                        button = `<button class="btn btn-warning btn-sm" onclick="showChangeStatusCliente('0', '${usuario.usuario_id}')">Desativar</button>`;
+                    } else {
+                        button = `<button class="btn btn-success btn-sm" onclick="showChangeStatusCliente('1', '${usuario.usuario_id}')">Ativar</button>`;
+                    }
+                    $("#linhasClientes").append(`
+                    <tr>
+                    <td>${usuario.usuario_nome}</td>
+                    <td>${usuario.usuario_ficha}</td>
+                    <td>${usuario.usuario_status_nome}</td>
+                    <td>${usuario.usuario_procedimentos}</td>
+                    <td>
+                      <button class="btn btn-primary btn-sm" onclick="showEditCliente(${usuario.usuario_id}, '${usuario.usuario_nome}', '${usuario.usuario_ficha}', '${usuario.usuario_cpf}', '${usuario.usuario_nascimento}', '${usuario.usuario_telefone}')">Editar</button>
+                      ${button}
+                      <button class="btn btn-danger btn-sm" onclick="showRemoverCliente(${usuario.usuario_id})">Remover</button>
+                    </td>
+                    </tr>
+                    `)
+                })
+            }
         }
+
     })
 }
+
+function setCliente() {
+    // Validação campos vazios
+    let validator = true;
+    let idCampoVazio = "";
+    $(".inputCliente").each(function () {
+      if ($(this).val().trim() == "") {
+        validator = false;
+        idCampoVazio = $(this).attr("id");
+        return false;
+      }
+    });
+  
+    if (!validator) {
+      $.toast({
+        heading: "Campo obrigatório inválido!",
+        text: "Preencha o campo obrigatório",
+        icon: "danger",
+        loader: true, // Change it to false to disable loader
+        loaderBg: "#ff0000", // To change the background
+      });
+      $("#" + idCampoVazio).focus();
+    } else if (
+      $("#usuario_senha").val().trim() !=
+      $("#usuario_confirma_senha").val().trim()
+    ) {
+      $.toast({
+        heading: "Senhas diferentes!",
+        text: "Suas senhas não estão iguais",
+        icon: "danger",
+        loader: true, // Change it to false to disable loader
+        loaderBg: "#ff0000", // To change the background
+      });
+    } 
+    
+    else if (
+        $("#usuario_ficha").val().trim() === $(this).attr("id")) {
+        $.toast({
+          heading: "Senhas diferentes!",
+          text: "Suas senhas não estão iguais",
+          icon: "danger",
+          loader: true, // Change it to false to disable loader
+          loaderBg: "#ff0000", // To change the background
+        });
+      }else {
+      // cadastra
+      let dados = [];
+      $(".inputCliente").each(function () {
+        if ($(this).attr("id") != "usuario_confirma_senha") {
+          dados.push($(this).val().trim());
+        }
+      });
+      console.log(dados);
+      let url = baseUri + "/register";
+      let data = {
+        usuario: {
+          login: dados[6],
+          senha: dados[7],
+          nome: dados[0],
+          cpf: dados[2],
+          nascimento: dados[3],
+          telefone: dados[4],
+          email: dados[5],
+          ficha: dados[1],
+        },
+      };
+      let method = 'POST';
+        let msg = "Cadastro";
+        if(usuario_id != null) {
+            if($("#usuario_senha").val() == '') {
+                data.usuario.usuario_senha = undefined;
+            }
+            data.usuario.usuario_id = usuario_id;
+            method = 'PUT';
+            msg = "Alteração";
+            url = baseUri + "/user"
+        }
+        $.ajax({
+            url: url,
+            method: method,
+            contentType: "application/JSON",
+            data: JSON.stringify(data),
+        }).done((res) => {
+            console.log(res);
+            if (res.err != undefined) {
+                // show erro
+                $.toast({
+                    heading: "Erro de "+msg+"!",
+                    text: res.err,
+                    icon: "danger",
+                    loader: true, // Change it to false to disable loader
+                    loaderBg: "#ff0000", // To change the background
+                });
+            } else {
+                $.toast({
+                    heading: msg + " realizado com sucesso!",
+                    text: res.err,
+                    icon: "success",
+                    loader: true, // Change it to false to disable loader
+                    loaderBg: "#00ff00", // To change the background
+                });
+                $("#modalAddCliente").modal('hide')
+                $(".inputCliente").val('')
+                getClientes();
+            }
+        });
+    }
+}
+  function showRemoverCliente(id) {
+    $('#modalRemoveCliente').modal('show');
+    usuario_id = id;
+} 
+
+  function removeCliente() {
+    if (usuario_id != null) {
+        $.ajax({
+            url: baseUri + "/user",
+            method: "DELETE",
+            contentType: 'application/JSON',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', token)
+            },
+            data: JSON.stringify({
+                usuario: {
+                    usuario_id: usuario_id
+                }
+            })
+        }).done(res => {
+            if (res.err == undefined) {
+                $("#modalRemoveCliente").modal('hide');
+                $.toast({
+                    heading: "Cliente removido com sucesso!",
+                    text: "",
+                    icon: "danger",
+                    loader: true, // Change it to false to disable loader
+                    loaderBg: "#00FF00", // To change the background
+                });
+                $("#modalRemoveCliente").modal('hide')
+                getClientes();
+            } else {
+                $.toast({
+                    heading: "Erro ao remover cliente",
+                    text: "",
+                    icon: "danger",
+                    loader: true, // Change it to false to disable loader
+                    loaderBg: "#00FF00", // To change the background
+                });
+            }
+
+        })
+    }
+}
+
+function showChangeStatusCliente(status, id) {
+    $.ajax({
+        url: baseUri + "/user",
+        method: "PUT",
+        contentType: "application/JSON",
+        data: JSON.stringify({
+            usuario: {
+                usuario_status: status,
+                usuario_id: id
+            }
+        }),
+    }).done((res) => {
+        console.log(res);
+        if (res.err != undefined) {
+            // show erro
+            $.toast({
+                heading: "Erro ao alterar status",
+                text: res.err,
+                icon: "danger",
+                loader: true, // Change it to false to disable loader
+                loaderBg: "#ff0000", // To change the background
+            });
+        } else {
+            $.toast({
+                heading: "Status alterado com sucesso!",
+                text: res.err,
+                icon: "success",
+                loader: true, // Change it to false to disable loader
+                loaderBg: "#00ff00", // To change the background
+            });            
+            
+            getClientes();
+        }
+    });
+}
+
+function showAddCliente() {
+    $(".inputCliente").val('');
+    $('#modalAddCliente').modal('show');
+    usuario_id = null;
+}
+
+function showEditCliente(id, nome, cpf, nascimento, email, telefone, ficha) {
+    
+    $('#modalAddCliente').modal('show');
+    usuario_id = id;
+    $("#usuario_nome").val(nome);
+    $("#usuario_ficha").val(ficha);
+    $("#usuario_cpf").val(cpf);
+    $("#usuario_nascimento").val(nascimento);
+    $("#usuario_telefone").val(telefone);
+    $("#usuario_email").val(email);
+    
+
+}
+  
 
 function getPrestadores() {
     if (!localStorage.getItem('apiceId') && !localStorage.getItem('apiceIToken')) {
@@ -336,8 +553,11 @@ function removePrestador() {
                     icon: "danger",
                     loader: true, // Change it to false to disable loader
                     loaderBg: "#00FF00", // To change the background
-                });
-                getPrestadores();
+                   
+                }
+                ); 
+
+                getPrestadores()
             } else {
                 $.toast({
                     heading: "Erro ao remover prestador",
@@ -347,7 +567,7 @@ function removePrestador() {
                     loaderBg: "#00FF00", // To change the background
                 });
             }
-
+           
         })
     }
 }

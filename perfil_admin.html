@@ -31,6 +31,7 @@
       <li class="list-group-item listas" id="navClientes" onclick="switchTelas('Clientes')">Clientes</li>
       <li class="list-group-item listas" id="navPrestadores" onclick="switchTelas('Prestadores')">Prestadores</li>
       <li class="list-group-item listas" id="navBlog" onclick="switchTelas('Blog')">Blog</li>
+     <a href="index.html"><li class="list-group-item listas">Home</li></a> 
     </ul>
     <ul class="list-group" style="position: absolute; bottom: 0px; width: 100%;">
       <li class="list-group-item listas" onclick="logout()">Sair</li>
@@ -98,7 +99,7 @@
             <div class="card">
               <div class="card-header">
                 <h3>Todos os clientes <button class="btn btn-success" style="float: right;"
-                    onclick="$('#modalAddCliente').modal('show')">Adicionar</button></h3>
+                    onclick="showAddCliente()">Adicionar</button></h3>
 
               </div>
               <div class="card-body">
@@ -374,54 +375,54 @@
       <div class="modal-body">
         <div class="form-group">
           <label for="procedimento_titulo">Nome completo</label>
-          <input type="text" id="usuario_nome" class="form-control">
+          <input type="text" id="usuario_nome" class="form-control inputCliente">
         </div>
         <div class="row pt-2">
           <div class="col-sm-12 col-md-6">
-            <label for="procedimento_desc">CPF</label>
-            <input type="text" id="usuario_cpf" class="form-control">
+            <label for="procedimento_titulo">Nº da Ficha</label>
+            <input type="text" id="usuario_ficha" class="form-control inputCliente">
           </div>
           <div class="col-sm-12 col-md-6">
-            <label for="procedimento_titulo">Data de nascimento</label>
-            <input type="date" id="usuario_nascimento" class="form-control">
+            <label for="procedimento_desc">CPF</label>
+            <input type="text" id="usuario_cpf" class="form-control inputCliente">
           </div>
         </div>
 
         <div class="row pt-2">
           <div class="col-sm-12 col-md-6">
-            <label for="procedimento_titulo">Email</label>
-            <input type="email" id="usuario_email" class="form-control">
+            <label for="procedimento_titulo">Data de nascimento</label>
+            <input type="date" id="usuario_nascimento" class="form-control inputCliente">
           </div>
           <div class="col-sm-12 col-md-6">
             <label for="procedimento_desc">Telefone</label>
-            <input type="text" id="usuario_telefone" class="form-control">
+            <input type="text" id="usuario_telefone" class="form-control inputCliente">
           </div>
         </div>
+
+        <div class="form-group">
+          <label for="procedimento_titulo">Email</label>
+          <input type="email" id="usuario_email" class="form-control inputCliente">
+        </div>
         <h3 class=" pt-5 pb-3 text-center">Informações pra Login</h1>
-          <div class="row">
-            <div class="col-sm-12 col-md-6">
+    
+            <div class="form-group">
               <label for="procedimento_titulo">Login</label>
-              <input type="text" id="usuario_login" class="form-control">
+              <input type="text" id="usuario_login" class="form-control inputCliente">
             </div>
-            <div class="col-sm-12 col-md-6">
-              <label for="procedimento_desc">Nº da ficha</label>
-              <input type="number" id="usuario_ficha" class="form-control">
-            </div>
-          </div>
           <div class="row pt-4">
             <div class="col-sm-12 col-md-6 ">
               <label for="procedimento_titulo">Senha</label>
-              <input type="password" id="usuario_senha" class="form-control">
+              <input type="password" id="usuario_senha" class="form-control inputCliente">
             </div>
             <div class="col-sm-12 col-md-6">
               <label for="procedimento_desc">Confirmar senha</label>
-              <input type="password" id="usuario_confirma_senha" class="form-control">
+              <input type="password" id="usuario_confirma_senha" class="form-control inputCliente">
             </div>
           </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-success" onclick="registerCliente()">Salvar</button>
+        <button type="button" class="btn btn-success" onclick="setCliente()">Salvar</button>
       </div>
     </div>
   </div>
