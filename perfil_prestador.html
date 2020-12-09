@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ===== CSS ===== -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="css/datatable/datatable.css">
+  <link rel="stylesheet" href="css/bootstrap/toast.css" />
+  <link rel="stylesheet" href="css/perfil.css">
+
+  <title>Painel Administrativo</title>
+</head>
+
+<div class="row">
+  <!-- Menu -->
+  <div class="col-sm-12 col-md-2 fullHeigth w-100 text-center" style="background-color: rgb(44, 44, 44); z-index: 5;">
+    <br>
+    <div>
+      <img src="./img/download.jpeg" alt="" class="profile-img">
+    </div>
+    <br><br>
+    <ul class="list-group">
+      <li class="list-group-item listas active" id="navDashboard" onclick="switchTelas('Dashboard')">Dashboard</li>
+      <li class="list-group-item listas" id="navProcedimentos" onclick="switchTelas('Procedimentos')">Procedimentos</li>
+
+      <li class="list-group-item listas" id="navClientes" onclick="switchTelas('Clientes')">Clientes</li>
+      <li class="list-group-item listas" id="navPrestadores" onclick="switchTelas('Prestadores')">Prestadores</li>
+      <li class="list-group-item listas" id="navBlog" onclick="switchTelas('Blog')">Blog</li>
+     <a href="index.html"><li class="list-group-item listas">Home</li></a> 
+    </ul>
+    <ul class="list-group" style="position: absolute; bottom: 0px; width: 100%;">
+      <li class="list-group-item listas" onclick="logout()">Sair</li>
+    </ul>
+  </div>
+  <!-- Menu -->
+
+  <!--Conteudo-->
+  <div class="col-sm-12 col-md-10 p-0 fullHeigth">
+    <!-- Menu sup -->
+    <div class="row menuSup w-100">
+      <div class="col-sm-6 col-md-8 align-self-center">
+        <h6>Olá <span id="usuarioNome"></span>, Seja bem vindo!</h6>
+      </div>
+    </div>
+    <!-- Menu sup -->
+
+    <!-- painel -->
+    <div class="container">
+
+      <!-- Div dashboard -->
+      <div class="telas" id="divDashboard">
+        <h1>Div de dashboard</h1>
+      </div>
+      <!-- Div dashboard -->
+
+      <!-- Div procedimentos -->
+      <div class="telas" id="divProcedimentos">
+        <div class="row painelCliente">
+          <div class="col-sm-12 col-md-12 p-0" style="padding-left: 50px !important; padding-right: 50px !important;">
+            <br><br>
+            <div class="card">
+              <div class="card-header">
+                <h3>Todos os procedimentos <button class="btn btn-success" style="float: right;"
+                    onclick="showAddProcedimento()">Adicionar</button></h3>
+
+              </div>
+              <div class="card-body">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th scope="col">Procedimento</th>
+                      <th scope="col">Tipo</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Cliente</th>
+                      <th scope="col">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody id="linhasProcedimentos">
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Fim procedimentos -->
+
+      <!-- Div Clientes -->
+      <div class="telas" id="divClientes">
+        <div class="row painelCliente">
+          <div class="col-sm-12 col-md-12" style="padding-left: 50px !important; padding-right: 50px !important;">
+            <br><br>
+            <div class="card">
+              <div class="card-header">
+                <h3>Todos os clientes <button class="btn btn-success" style="float: right;"
+                    onclick="showAddCliente()">Adicionar</button></h3>
+
+              </div>
+              <div class="card-body">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th scope="col">Nome</th>
+                      <th scope="col">Ficha</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Procedimentos</th>
+                      <th scope="col">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody id="linhasClientes">
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Div Clientes -->
+
+      <!-- Div Prestadores -->
+      <div class="telas" id="divPrestadores">
+        <div class="row painelCliente">
+          <div class="col-sm-12 col-md-12" style="padding-left: 50px !important; padding-right: 50px !important;">
+            <br><br>
+            <div class="card">
+              <div class="card-header">
+                <h3>Todos os prestadores <button class="btn btn-success" style="float: right;"
+                    onclick="showAddPrestador()">Adicionar</button></h3>
+
+              </div>
+              <div class="card-body">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th scope="col">Nome</th>
+                      <th scope="col">E-mail</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody id="linhasPrestadores">
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Div Prestadores -->
+
+      <!-- Div Blog -->
+      <div class="telas" id="divBlog">
+        <div class="row painelCliente">
+          <div class="col-sm-12 col-md-12" style="padding-left: 50px !important; padding-right: 50px !important;">
+            <br><br>
+            <div class="card">
+              <div class="card-header">
+                <h3>Todos os posts do Blog <button class="btn btn-success" style="float: right;"
+                    onclick="showAddBlog()">Adicionar</button></h3>
+
+              </div>
+              <div class="card-body">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th scope="col">Título</th>
+                      <th scope="col">Data</th>
+                      <th scope="col">Aparece na home</th>
+                      <th scope="col">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody id="linhasBlog">
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Div Blog -->
+    </div>
+    <!-- FIm painel -->
+  </div>
+  <!--Conteudo-->
+</div>
+
+
+
+
+
+
+<!-- MODAL PROCEDIMENTO -->
+
+<!-- Add Procedimento -->
+<div class="modal fade" id="modalAddProcedimento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Adicionar procedimento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="procedimento_titulo">Título</label>
+          <input type="text" id="procedimento_titulo" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="procedimento_desc">Descrição</label>
+          <textarea id="procedimento_desc" class="form-control" rows="3"></textarea>
+        </div>
+
+
+        <div class="form-group">
+          <label for="procedimento_tipo">Tipo</label>
+          <select type="text" id="procedimento_tipo" class="form-control">
+            <option value="1">Pacote</option>
+            <option value="2">Avulso</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="procedimento_cliente">Cliente</label>
+          <select type="text" id="procedimento_cliente" class="form-control">
+            <option>Selecione um cliente</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success" onclick="setProcedimento()">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Add Procedimento -->
+
+<!--Remove Procedimento-->
+<div class="modal fade" id="modalRemoveProcedimento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Remover Procedimento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <p>Tem certeza que deseja <span style="color: red; font-weight: bold;">REMOVER</span> procedimento?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger" onclick="removeProcedimento()">Sim, remover</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Remove Procedimento-->
+
+<!-- FIM PROCEDIMENTO -->
+
+
+<!-- MODAL PRESTADOR -->
+
+<!--Add Prestador-->
+<div class="modal fade" id="modalAddPrestador" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Adicionar prestador</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="usuario_nome">Nome completo</label>
+          <input type="text" id="usuario_nome_prestador" class="form-control inputPrestador">
+        </div>
+
+        <div class="row pt-2">
+          <div class="col-sm-12 col-md-6">
+            <label for="usuario_email_prestador">Email</label>
+            <input type="email" id="usuario_email_prestador" class="form-control inputPrestador">
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <label for="usuario_tipo_prestador">Tipo</label>
+            <select id="usuario_tipo_prestador" class="form-control inputPrestador">
+              <option value="prestador">Prestador</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+        </div>
+        <h3 class=" pt-5 pb-3 text-center">Informações pra Login</h1>
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <label for="usuario_login_prestador">login</label>
+              <input type="text" id="usuario_login_prestador" class="form-control inputPrestador">
+            </div>
+            
+          </div>
+          <div class="row pt-4">
+            <div class="col-sm-12 col-md-6 ">
+              <label for="usuario_senha_prestador">Senha</label>
+              <input type="password" id="usuario_senha_prestador" class="form-control inputPrestador">
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <label for="usuario_confirma_senha_prestador">Confirmar senha</label>
+              <input type="password" id="usuario_confirma_senha_prestador" class="form-control inputPrestador">
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success" onclick="setPrestador()">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Add Prestador-->
+
+<!--Remove Prestador-->
+<div class="modal fade" id="modalRemovePrestador" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Remover Prestador</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <p>Tem certeza que deseja <span style="color: red; font-weight: bold;">REMOVER</span> Prestador?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger" onclick="removePrestador()">Sim, remover</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Remove Prestador-->
+
+<!-- FIM PRESTADOR -->
+
+
+<!-- MODAL CLIENTE -->
+
+<!-- Add Cliente -->
+<div class="modal fade" id="modalAddCliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Adicionar Cliente</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="procedimento_titulo">Nome completo</label>
+          <input type="text" id="usuario_nome" class="form-control inputCliente">
+        </div>
+        <div class="row pt-2">
+          <div class="col-sm-12 col-md-6">
+            <label for="procedimento_titulo">Nº da Ficha</label>
+            <input type="text" id="usuario_ficha" class="form-control inputCliente numeros">
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <label for="procedimento_desc">CPF</label>
+            <input type="text" id="usuario_cpf" class="form-control inputCliente cpf">
+          </div>
+        </div>
+
+        <div class="row pt-2">
+          <div class="col-sm-12 col-md-6">
+            <label for="procedimento_titulo">Data de nascimento</label>
+            <input type="date" id="usuario_nascimento" class="form-control inputCliente">
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <label for="procedimento_desc">Telefone</label>
+            <input type="text" id="usuario_telefone" class="form-control inputCliente celular">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="procedimento_titulo">Email</label>
+          <input type="email" id="usuario_email" class="form-control inputCliente">
+        </div>
+        <h3 class=" pt-5 pb-3 text-center">Informações pra Login</h1>
+    
+            <div class="form-group">
+              <label for="procedimento_titulo">Login</label>
+              <input type="text" id="usuario_login" class="form-control inputCliente">
+            </div>
+          <div class="row pt-4">
+            <div class="col-sm-12 col-md-6 ">
+              <label for="procedimento_titulo">Senha</label>
+              <input type="password" id="usuario_senha" class="form-control inputCliente">
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <label for="procedimento_desc">Confirmar senha</label>
+              <input type="password" id="usuario_confirma_senha" class="form-control inputCliente">
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success" onclick="setCliente()">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Add Cliente -->
+
+
+<!--Desativar Cliente-->
+<div class="modal fade" id="modalDesativeCliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Desativar Cliente</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <p>Tem certeza que deseja <span style="color: orange; font-weight: bold;">DESATIVAR</span> cliente?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-warning" onclick="desativeCliente()">Sim, desativar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Desativar Cliente-->
+
+<!--Remover Cliente-->
+<div class="modal fade" id="modalRemoveCliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Remover Cliente</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <p>Tem certeza que deseja <span style="color: red; font-weight: bold;">REMOVER</span> cliente?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger" onclick="removeCliente()">Sim, remover</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Remover Cliente-->
+
+<!-- FIM MODAL CLIENTE -->
+
+<!-- MODAL BlOG -->
+
+<!-- Add Blog -->
+<div class="modal fade" id="modalAddBlog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Adicionar Postagem</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Titulo</label>
+          <input type="text" class="form-control" id="blog_titulo">
+        </div>
+
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Breve Descrição</label>
+          <textarea class="form-control" id="blog_desc" rows="3"></textarea>
+
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Descrição completa</label>
+          <textarea class="form-control" id="blog_desc_full" rows="8"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Mostrar na Tela principal</label>
+          <select class="form-control" id="blog_home">
+            <option value="1">Mostrar</option>
+            <option value="2">Não Mostrar</option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-success" onclick="setBlog()">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Add Blog -->
+<!-- Remove Blog -->
+<div class="modal fade" id="modalRemoveBlog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Remover Postagem</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <p>Tem certeza que deseja <span style="color: red; font-weight: bold;">REMOVER</span> esta postagem?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger" onclick="removeBlog()">Sim, remover</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Remove Blog -->
+
+<!-- fim modais -->
+<script src="js/jquery/jquery.js"></script>
+<script src="js/bootstrap/bootstrap.min.js"></script>
+<script src="js/jquery/datatable.js"></script>
+<script src="js/jquery/jquery.mask.js"></script>
+<script src="js/scripts/toast.js"></script>
+<script src="js/scripts/mascaras.js"></script>
+<script src="js/scripts/cpfValidator.js"></script>
+<script src="js/scripts/perfil_admin.js"></script>
+
+</body>
+
+</html>
