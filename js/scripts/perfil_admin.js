@@ -60,6 +60,21 @@ $(document).ready(function () {
         }
     });
 
+    $("#usuario_cpf").blur(function() {
+        
+        let cpf = $("#usuario_cpf").val().replace('.', '').replace('.', '').replace('-', '');
+        
+        if(!TestaCPF(cpf)) {
+            $.toast({
+                heading: "CPF Inválido!",
+                text: "",
+                icon: "danger",
+                loader: true, // Change it to false to disable loader
+                loaderBg: "#ff0000", // To change the background
+            });
+            $("#usuario_cpf").focus();
+        }
+    })
 
 });
 
@@ -243,11 +258,12 @@ function getClientes() {
         let usuarios = res.usuarios;
         $("#linhasClientes").html('');
         if (res.err == undefined) {
-
+            $("#procedimento_cliente").html("<option>Selecione um cliente</option>")
             var button;
             if (usuarios.length > 0) {
                 usuarios.map(usuario => {
 
+                    $("#procedimento_cliente").append(`<option value="${usuario.usuario_id}">${usuario.usuario_nome}</option>`)
                     if (usuario.usuario_status == 1) {
                         button = `<button class="btn btn-warning btn-sm" onclick="showChangeStatusCliente('0', '${usuario.usuario_id}')">Desativar</button>`;
                     } else {
@@ -458,7 +474,7 @@ function showAddCliente() {
 }
 
 function showEditCliente(id, nome, ficha, cpf, nascimento, email, telefone, login) {
-    alert(ficha);
+    
     $('#modalAddCliente').modal('show');
     cliente_id = id;
     $("#usuario_nome").val(nome);
