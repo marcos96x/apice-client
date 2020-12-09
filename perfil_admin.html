@@ -65,7 +65,7 @@
             <div class="card">
               <div class="card-header">
                 <h3>Todos os procedimentos <button class="btn btn-success" style="float: right;"
-                    onclick="$('#modalAddProcedimento').modal('show')">Adicionar</button></h3>
+                    onclick="showAddProcedimento()">Adicionar</button></h3>
 
               </div>
               <div class="card-body">
@@ -131,7 +131,7 @@
             <div class="card">
               <div class="card-header">
                 <h3>Todos os prestadores <button class="btn btn-success" style="float: right;"
-                    onclick="$('#modalAddPrestador').modal('show')">Adicionar</button></h3>
+                    onclick="showAddPrestador()">Adicionar</button></h3>
 
               </div>
               <div class="card-body">
@@ -163,7 +163,7 @@
             <div class="card">
               <div class="card-header">
                 <h3>Todos os posts do Blog <button class="btn btn-success" style="float: right;"
-                    onclick="$('#modalAddBlog').modal('show')">Adicionar</button></h3>
+                    onclick="showAddBlog()">Adicionar</button></h3>
 
               </div>
               <div class="card-body">
@@ -222,7 +222,7 @@
 
 
         <div class="form-group">
-          <label for="procedimento_titulo">Tipo</label>
+          <label for="procedimento_tipo">Tipo</label>
           <select type="text" id="procedimento_tipo" class="form-control">
             <option value="1">Pacote</option>
             <option value="2">Avulso</option>
@@ -243,51 +243,6 @@
   </div>
 </div>
 <!-- Add Procedimento -->
-
-<!--Edit Procedimento-->
-<div class="modal fade" id="modalEditProcedimento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Editar procedimento</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label for="procedimento_titulo">Título</label>
-          <input type="text" id="procedimento_titulo" class="form-control">
-        </div>
-        <div class="form-group">
-          <label for="procedimento_desc">Descrição</label>
-          <textarea id="procedimento_desc" class="form-control" rows="3"></textarea>
-        </div>
-
-
-        <div class="form-group">
-          <label for="procedimento_titulo">Tipo</label>
-          <select type="text" id="procedimento_tipo" class="form-control">
-            <option value="1">Pacote</option>
-            <option value="2">Avulso</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="procedimento_cliente">Cliente</label>
-          <select type="text" id="procedimento_cliente" class="form-control">
-            <option>Selecione um cliente</option>
-          </select>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" onclick="editProcedimento()">Editar</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--Edit Procedimento-->
 
 <!--Remove Procedimento-->
 <div class="modal fade" id="modalRemoveProcedimento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -331,52 +286,39 @@
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label for="procedimento_titulo">Nome completo</label>
-          <input type="text" id="usuario_nome" class="form-control">
-        </div>
-        <div class="row pt-2">
-          <div class="col-sm-12 col-md-6">
-            <label for="procedimento_desc">CPF</label>
-            <input type="text" id="usuario_cpf" class="form-control">
-          </div>
-          <div class="col-sm-12 col-md-6">
-            <label for="procedimento_titulo">Data de nascimento</label>
-            <input type="date" id="usuario_nascimento" class="form-control">
-          </div>
+          <label for="usuario_nome">Nome completo</label>
+          <input type="text" id="usuario_nome_prestador" class="form-control inputPrestador">
         </div>
 
         <div class="row pt-2">
           <div class="col-sm-12 col-md-6">
-            <label for="procedimento_titulo">Email</label>
-            <input type="email" id="usuario_email" class="form-control">
+            <label for="usuario_email_prestador">Email</label>
+            <input type="email" id="usuario_email_prestador" class="form-control inputPrestador">
           </div>
           <div class="col-sm-12 col-md-6">
-            <label for="procedimento_desc">Telefone</label>
-            <input type="text" id="usuario_telefone" class="form-control">
+            <label for="usuario_tipo_prestador">Tipo</label>
+            <select id="usuario_tipo_prestador" class="form-control inputPrestador">
+              <option value="prestador">Prestador</option>
+              <option value="admin">Admin</option>
+            </select>
           </div>
         </div>
         <h3 class=" pt-5 pb-3 text-center">Informações pra Login</h1>
           <div class="row">
             <div class="col-sm-12 col-md-6">
-              <label for="procedimento_titulo">login</label>
-              <input type="text" id="usuario_senha" class="form-control">
+              <label for="usuario_login_prestador">login</label>
+              <input type="text" id="usuario_login_prestador" class="form-control inputPrestador">
             </div>
-            <div class="col-sm-12 col-md-6">
-              <label for="procedimento_desc">Tipo</label>
-              <select id="usuario_tipo" class="form-control">
-                <option value="1">Prestador</option>
-                <option value="2">Admin</option>
-              </select>
-            </div>
+            
           </div>
           <div class="row pt-4">
             <div class="col-sm-12 col-md-6 ">
-              <label for="procedimento_titulo">Senha</label>
-              <input type="password" id="usuario_senha" class="form-control">
+              <label for="usuario_senha_prestador">Senha</label>
+              <input type="password" id="usuario_senha_prestador" class="form-control inputPrestador">
             </div>
             <div class="col-sm-12 col-md-6">
-              <label for="procedimento_desc">Confirmar senha</label>
-              <input type="password" id="usuario_confirma_senha" class="form-control">
+              <label for="usuario_confirma_senha_prestador">Confirmar senha</label>
+              <input type="password" id="usuario_confirma_senha_prestador" class="form-control inputPrestador">
             </div>
           </div>
       </div>
@@ -388,101 +330,6 @@
   </div>
 </div>
 <!--Add Prestador-->
-
-<!--Edit Prestador-->
-<div class="modal fade" id="modalEditPrestador" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Editar Prestador</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label for="procedimento_titulo">Nome completo</label>
-          <input type="text" id="usuario_nome" class="form-control">
-        </div>
-        <div class="row pt-2">
-          <div class="col-sm-12 col-md-6">
-            <label for="procedimento_desc">CPF</label>
-            <input type="text" id="usuario_cpf" class="form-control">
-          </div>
-          <div class="col-sm-12 col-md-6">
-            <label for="procedimento_titulo">Data de nascimento</label>
-            <input type="date" id="usuario_nascimento" class="form-control">
-          </div>
-        </div>
-
-        <div class="row pt-2">
-          <div class="col-sm-12 col-md-6">
-            <label for="procedimento_titulo">Email</label>
-            <input type="email" id="usuario_email" class="form-control">
-          </div>
-          <div class="col-sm-12 col-md-6">
-            <label for="procedimento_desc">Telefone</label>
-            <input type="text" id="usuario_telefone" class="form-control">
-          </div>
-        </div>
-        <h3 class=" pt-5 pb-3 text-center">Informações pra Login</h1>
-          <div class="row">
-            <div class="col-sm-12 col-md-6">
-              <label for="procedimento_titulo">login</label>
-              <input type="text" id="usuario_senha" class="form-control">
-            </div>
-            <div class="col-sm-12 col-md-6">
-              <label for="procedimento_desc">Tipo</label>
-              <select id="usuario_tipo" class="form-control">
-                <option value="1">Prestador</option>
-                <option value="2">Admin</option>
-              </select>
-            </div>
-          </div>
-          <div class="row pt-4">
-            <div class="col-sm-12 col-md-6 ">
-              <label for="procedimento_titulo">Senha</label>
-              <input type="password" id="usuario_senha" class="form-control">
-            </div>
-            <div class="col-sm-12 col-md-6">
-              <label for="procedimento_desc">Confirmar senha</label>
-              <input type="password" id="usuario_confirma_senha" class="form-control">
-            </div>
-          </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" onclick="setPrestador()">Editar</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--Edit Prestador-->
-
-<!--Desative Prestador-->
-<div class="modal fade" id="modalDesativePrestador" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Desativar Prestador</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-
-        <p>Tem certeza que deseja <span style="color: orange; font-weight: bold;">DESATIVAR</span> prestador?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-warning" onclick="desativePrestador()">Sim, desativar</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--Desative Prestador-->
 
 <!--Remove Prestador-->
 <div class="modal fade" id="modalRemovePrestador" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -581,73 +428,6 @@
 </div>
 <!-- Add Cliente -->
 
-<!-- Edit Cliente -->
-<div class="modal fade" id="modalEditCliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Editar Cliente</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label for="procedimento_titulo">Nome completo</label>
-          <input type="text" id="usuario_nome" class="form-control">
-        </div>
-        <div class="row pt-2">
-          <div class="col-sm-12 col-md-6">
-            <label for="procedimento_desc">CPF</label>
-            <input type="text" id="usuario_cpf" class="form-control">
-          </div>
-          <div class="col-sm-12 col-md-6">
-            <label for="procedimento_titulo">Data de nascimento</label>
-            <input type="date" id="usuario_nascimento" class="form-control">
-          </div>
-        </div>
-
-        <div class="row pt-2">
-          <div class="col-sm-12 col-md-6">
-            <label for="procedimento_titulo">Email</label>
-            <input type="email" id="usuario_email" class="form-control">
-          </div>
-          <div class="col-sm-12 col-md-6">
-            <label for="procedimento_desc">Telefone</label>
-            <input type="text" id="usuario_telefone" class="form-control">
-          </div>
-        </div>
-        <h3 class=" pt-5 pb-3 text-center">Informações pra Login</h1>
-          <div class="row">
-            <div class="col-sm-12 col-md-6">
-              <label for="procedimento_titulo">Login</label>
-              <input type="text" id="usuario_login" class="form-control">
-            </div>
-            <div class="col-sm-12 col-md-6">
-              <label for="procedimento_desc">Nº da ficha</label>
-              <input type="number" id="usuario_ficha" class="form-control">
-            </div>
-          </div>
-          <div class="row pt-4">
-            <div class="col-sm-12 col-md-6 ">
-              <label for="procedimento_titulo">Senha</label>
-              <input type="password" id="usuario_senha" class="form-control">
-            </div>
-            <div class="col-sm-12 col-md-6">
-              <label for="procedimento_desc">Confirmar senha</label>
-              <input type="password" id="usuario_confirma_senha" class="form-control">
-            </div>
-          </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" onclick="editCliente()">Editar</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Edit Cliente -->
 
 <!--Desativar Cliente-->
 <div class="modal fade" id="modalDesativeCliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -743,50 +523,6 @@
   </div>
 </div>
 <!-- Add Blog -->
-
-<!-- Edit Blog -->
-<div class="modal fade" id="modalEditBlog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Editar Postagem</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label for="exampleFormControlInput1">Titulo</label>
-          <input type="text" class="form-control" id="blog_titulo">
-        </div>
-
-        <div class="form-group">
-          <label for="exampleFormControlTextarea1">Breve Descrição</label>
-          <textarea class="form-control" id="blog_desc" rows="3"></textarea>
-
-        </div>
-        <div class="form-group">
-          <label for="exampleFormControlTextarea1">Descrição completa</label>
-          <textarea class="form-control" id="blog_desc_full" rows="8"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="exampleFormControlSelect1">Mostrar na Tela principal</label>
-          <select class="form-control" id="blog_home">
-            <option value="1">Mostrar</option>
-            <option value="2">Não Mostrar</option>
-          </select>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" onclick="editBlog()">Editar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Edit Blog -->
-
 <!-- Remove Blog -->
 <div class="modal fade" id="modalRemoveBlog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
@@ -804,7 +540,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-danger" onclick="removeCliente()">Sim, remover</button>
+        <button type="button" class="btn btn-danger" onclick="removeBlog()">Sim, remover</button>
       </div>
     </div>
   </div>

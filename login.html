@@ -136,6 +136,13 @@
   <script src="./js/scripts/login.js"></script>
 
  
+  <script>
+    $("#senha").keydown(function(e) {
+      if(e.keyCode == 13) {
+        login();
+      }
+    })
+  </script>
 </body>
 
 </html>
