@@ -12,6 +12,12 @@
   <link rel="stylesheet" href="css/datatable/datatable.css">
   <link rel="stylesheet" href="css/bootstrap/toast.css" />
   <link rel="stylesheet" href="css/perfil.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+    crossorigin="anonymous" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/fontawesome.min.js"
+    integrity="sha512-kI12xOdWTh/nL2vIx5Yf3z/kJSmY+nvdTXP2ARhepM/YGcmo/lmRGRttI3Da8FXLDw0Y9hRAyZ5JFO3NrCvvXA=="
+    crossorigin="anonymous"></script>
 
   <title>Painel Administrativo</title>
 </head>
@@ -25,13 +31,15 @@
     </div>
     <br><br>
     <ul class="list-group">
-      <li class="list-group-item listas active" id="navDashboard" onclick="switchTelas('Dashboard')">Dashboard</li>
+      <li class="list-group-item listas active" id="navDashboard" onclick="switchTelas('Dashboard'); getDashboard();">Dashboard</li>
       <li class="list-group-item listas" id="navProcedimentos" onclick="switchTelas('Procedimentos')">Procedimentos</li>
 
       <li class="list-group-item listas" id="navClientes" onclick="switchTelas('Clientes')">Clientes</li>
       <li class="list-group-item listas" id="navPrestadores" onclick="switchTelas('Prestadores')">Prestadores</li>
       <li class="list-group-item listas" id="navBlog" onclick="switchTelas('Blog')">Blog</li>
-     <a href="index.html"><li class="list-group-item listas">Home</li></a> 
+      <a href="index.html">
+        <li class="list-group-item listas">Home</li>
+      </a>
     </ul>
     <ul class="list-group" style="position: absolute; bottom: 0px; width: 100%;">
       <li class="list-group-item listas" onclick="logout()">Sair</li>
@@ -54,7 +62,110 @@
 
       <!-- Div dashboard -->
       <div class="telas" id="divDashboard">
-        <h1>Div de dashboard</h1>
+        <h1></h1>
+        <!-- 
+
+          Quantidade de cada procedimento, vou lhe mandar aqui cada um
+
+Se for fácil fazer gráfico, tipo fazer um com os procedimentos, seria daora se pudesse
+
+Quantidade de prestadores,  e clientes ativos
+
+Quantidade deles desativados
+         -->
+        <div class="row painelCliente">
+          <div class="col-sm-12 text-center mt-3 mb-3">
+            <h4>Ativos</h4>
+          </div>
+          <div class="col-sm-12 col-md-4" style="padding-left: 50px !important; padding-right: 50px !important;">
+            <div class="card card-outline-primary">
+              <div class="card-header"></div>
+              <div class="card-body ">
+                <div class="row align-items-center">
+                  <div class="col-3 text-right"><i class="fa fa-users fa-2x" aria-hidden="true"></i></div>
+                  <div class="col-9 text-left">
+                    <h5>Clientes</h5>
+                    <h1 class="counter" id="qtdClienteAtivo">3</h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4" style="padding-left: 50px !important; padding-right: 50px !important;">
+            <div class="card card-outline-primary">
+              <div class="card-header"></div>
+              <div class="card-body ">
+                <div class="row align-items-center">
+                  <div class="col-3 text-right"><i class="fa fa-briefcase fa-2x" aria-hidden="true"></i></div>
+                  <div class="col-9 text-left">
+                    <h5>Prestadores</h5>
+                    <h1 class="counter" id="qtdPrestadorAtivo">3</h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4" style="padding-left: 50px !important; padding-right: 50px !important;">
+            <div class="card card-outline-primary">
+              <div class="card-header"></div>
+              <div class="card-body ">
+                <div class="row align-items-center">
+                  <div class="col-3 text-right"><i class="fa fa-user-md fa-2x" aria-hidden="true"></i></div>
+                  <div class="col-9 text-left">
+                    <h5>Procedimentos</h5>
+                    <h1 class="counter" id="qtdProcedimentoAtivo">3</h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 text-center mt-3 mb-3">
+            <hr>
+            <h4>Inativos</h4>
+          </div>
+          <div class="col-sm-12 col-md-4" style="padding-left: 50px !important; padding-right: 50px !important;">
+            <div class="card card-outline-primary">
+              <div class="card-header"></div>
+              <div class="card-body ">
+                <div class="row align-items-center">
+                  <div class="col-3 text-right"><i class="fa fa-users fa-2x" aria-hidden="true"></i></div>
+                  <div class="col-9 text-left">
+                    <h5>Clientes</h5>
+                    <h1 class="counter" id="qtdClienteInativo">3</h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4" style="padding-left: 50px !important; padding-right: 50px !important;">
+            <div class="card card-outline-primary">
+              <div class="card-header"></div>
+              <div class="card-body ">
+                <div class="row align-items-center">
+                  <div class="col-3 text-right"><i class="fa fa-briefcase fa-2x" aria-hidden="true"></i></div>
+                  <div class="col-9 text-left">
+                    <h5>Prestadores</h5>
+                    <h1 class="counter" id="qtdPrestadorInativo">3</h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4" style="padding-left: 50px !important; padding-right: 50px !important;">
+            <div class="card card-outline-primary">
+              <div class="card-header"></div>
+              <div class="card-body ">
+                <div class="row align-items-center">
+                  <div class="col-3 text-right"><i class="fa fa-user-md fa-2x" aria-hidden="true"></i></div>
+                  <div class="col-9 text-left">
+                    <h5>Procedimentos</h5>
+                    <h1 class="counter" id="qtdProcedimentoInativo">2</h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <!-- Div dashboard -->
 
@@ -310,7 +421,7 @@
               <label for="usuario_login_prestador">login</label>
               <input type="text" id="usuario_login_prestador" class="form-control inputPrestador">
             </div>
-            
+
           </div>
           <div class="row pt-4">
             <div class="col-sm-12 col-md-6 ">
@@ -404,11 +515,11 @@
           <input type="email" id="usuario_email" class="form-control inputCliente">
         </div>
         <h3 class=" pt-5 pb-3 text-center">Informações pra Login</h1>
-    
-            <div class="form-group">
-              <label for="procedimento_titulo">Login</label>
-              <input type="text" id="usuario_login" class="form-control inputCliente">
-            </div>
+
+          <div class="form-group">
+            <label for="procedimento_titulo">Login</label>
+            <input type="text" id="usuario_login" class="form-control inputCliente">
+          </div>
           <div class="row pt-4">
             <div class="col-sm-12 col-md-6 ">
               <label for="procedimento_titulo">Senha</label>
@@ -552,6 +663,8 @@
 <script src="js/jquery/jquery.js"></script>
 <script src="js/bootstrap/bootstrap.min.js"></script>
 <script src="js/jquery/datatable.js"></script>
+<script src="js/jquery/counterup.js"></script>
+<script src="js/jquery/waypoint.js"></script>
 <script src="js/jquery/jquery.mask.js"></script>
 <script src="js/scripts/toast.js"></script>
 <script src="js/scripts/mascaras.js"></script>

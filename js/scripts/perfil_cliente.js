@@ -99,8 +99,8 @@ function getProcedimentos() {
                 $("#linhasProcedimentos").append(`
                 <tr>
                 <td>${procedimento.procedimento_titulo}</td>
-                <td>${procedimento.procedimento_tipo}</td>
-                <td>${procedimento.procedimento_status}</td>
+                <td>${procedimento.procedimento_tipo_nome}</td>
+                <td>${procedimento.procedimento_status_nome}</td>
                 <td>
                   <button class="btn btn-primary btn-sm">Visualizar</button>
                 </td>

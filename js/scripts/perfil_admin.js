@@ -6,59 +6,62 @@ var procedimento_id = null;
 var prestador_id = null;
 var cliente_id = null;
 
+const datatablePtBr = {
+    "emptyTable": "Nenhum registro encontrado",
+    "info": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+    "infoEmpty": "Mostrando 0 até 0 de 0 registros",
+    "infoFiltered": "(Filtrados de _MAX_ registros)",
+    "infoThousands": ".",
+    "lengthMenu": "_MENU_ resultados por página",
+    "loadingRecords": "Carregando...",
+    "processing": "Processando...",
+    "zeroRecords": "Nenhum registro encontrado",
+    "search": "Pesquisar",
+    "paginate": {
+        "next": "Próximo",
+        "previous": "Anterior",
+        "first": "Primeiro",
+        "last": "Último"
+    },
+    "aria": {
+        "sortAscending": ": Ordenar colunas de forma ascendente",
+        "sortDescending": ": Ordenar colunas de forma descendente"
+    },
+    "select": {
+        "rows": {
+            "_": "Selecionado %d linhas",
+            "0": "Nenhuma linha selecionada",
+            "1": "Selecionado 1 linha"
+        }
+    },
+    "buttons": {
+        "copy": "Copiar para a área de transferência",
+        "copyTitle": "Cópia bem sucedida",
+        "copySuccess": {
+            "1": "Uma linha copiada com sucesso",
+            "_": "%d linhas copiadas com sucesso"
+        }
+    }
+};
+
 $(document).ready(function () {
     if (!localStorage.getItem('apiceId') && !localStorage.getItem('apiceIToken')) {
         localStorage.clear()
         window.location.replace("login.html");
     }
+
+    
     // esconde todas as telas
     $(".telas").hide();
     // mostra a tela de procedimentos inicialmente
-    $("#divClientes").show();
+    getDashboard();
+    $("#divDashboard").show();
     getUser()
     getProcedimentos()
     getClientes()
     getPrestadores()
     getBlog()
-    $('#procedimentosTable').DataTable({
-        language: {
-            "emptyTable": "Nenhum registro encontrado",
-            "info": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-            "infoEmpty": "Mostrando 0 até 0 de 0 registros",
-            "infoFiltered": "(Filtrados de _MAX_ registros)",
-            "infoThousands": ".",
-            "lengthMenu": "_MENU_ resultados por página",
-            "loadingRecords": "Carregando...",
-            "processing": "Processando...",
-            "zeroRecords": "Nenhum registro encontrado",
-            "search": "Pesquisar",
-            "paginate": {
-                "next": "Próximo",
-                "previous": "Anterior",
-                "first": "Primeiro",
-                "last": "Último"
-            },
-            "aria": {
-                "sortAscending": ": Ordenar colunas de forma ascendente",
-                "sortDescending": ": Ordenar colunas de forma descendente"
-            },
-            "select": {
-                "rows": {
-                    "_": "Selecionado %d linhas",
-                    "0": "Nenhuma linha selecionada",
-                    "1": "Selecionado 1 linha"
-                }
-            },
-            "buttons": {
-                "copy": "Copiar para a área de transferência",
-                "copyTitle": "Cópia bem sucedida",
-                "copySuccess": {
-                    "1": "Uma linha copiada com sucesso",
-                    "_": "%d linhas copiadas com sucesso"
-                }
-            }
-        }
-    });
+    
 
     $("#usuario_cpf").blur(function() {
         
@@ -77,6 +80,33 @@ $(document).ready(function () {
     })
 
 });
+
+function getDashboard() {
+    let url = baseUri + "/relatorios"
+    $.ajax({
+        url: url,
+        method: 'get',
+        contentType: 'application/JSON'
+    }).done(res => {
+        let dash = res.relatorio;
+        console.log(dash)
+            $("#qtdClienteAtivo").html(dash.clientes_ativos);
+            $("#qtdClienteInativo").html(dash.clientes_inativos);
+
+            $("#qtdPrestadorAtivo").html(dash.prestadores_ativos);
+            $("#qtdPrestadorInativo").html(dash.prestadores_inativos);
+
+            $("#qtdProcedimentoAtivo").html(dash.procedimentos_ativos);
+            $("#qtdProcedimentoInativo").html(dash.procedimentos_inativos);
+
+            setTimeout(() => {
+                $('.counter').counterUp({
+                    time: 1000
+                });
+        
+            }, 400);
+    })
+}
 
 function getUser() {
     if (!localStorage.getItem('apiceToken')) {
@@ -98,7 +128,7 @@ function getUser() {
         contentType: 'application/JSON',
         data: JSON.stringify(data)
     }).done(res => {
-        console.log(res)
+        
         if (res.err != undefined) {
             localStorage.clear()
             window.location.replace("login.html");
@@ -116,10 +146,10 @@ function getProcedimentos() {
         method: 'GET',
         contentType: 'application/JSON'
     }).done(res => {
-        console.log(res)
+        
         let procedimentos = res.procedimentos;
         $("#linhasProcedimentos").html('');
-        if (procedimentos.length > 0) {
+        if (procedimentos != null && procedimentos.length > 0) {
             procedimentos.map(procedimento => {
                 if (procedimento.procedimento_status == 1) {
                     button = `<button class="btn btn-warning btn-sm" onclick="showChangeStatusProcedimento('0', '${procedimento.procedimento_id}')">Desativar</button>`;
@@ -156,7 +186,7 @@ function showChangeStatusProcedimento(status, id) {
             }
         }),
     }).done((res) => {
-        console.log(res);
+        ;
         if (res.err != undefined) {
             // show erro
             $.toast({
@@ -254,13 +284,14 @@ function getClientes() {
         method: 'GET',
         contentType: 'application/JSON'
     }).done(res => {
-        console.log(res)
+        
+        
         let usuarios = res.usuarios;
         $("#linhasClientes").html('');
         if (res.err == undefined) {
             $("#procedimento_cliente").html("<option>Selecione um cliente</option>")
             var button;
-            if (usuarios.length > 0) {
+            if (usuarios != null && usuarios.length > 0) {
                 usuarios.map(usuario => {
 
                     $("#procedimento_cliente").append(`<option value="${usuario.usuario_id}">${usuario.usuario_nome}</option>`)
@@ -330,7 +361,7 @@ function setCliente() {
                 dados.push($(this).val().trim());
             }
         });
-        console.log(dados);
+        
         let url = baseUri + "/register";
         let data = {
             usuario: {
@@ -361,7 +392,7 @@ function setCliente() {
             contentType: "application/JSON",
             data: JSON.stringify(data),
         }).done((res) => {
-            console.log(res);
+            ;
             if (res.err != undefined) {
                 // show erro
                 $.toast({
@@ -443,7 +474,7 @@ function showChangeStatusCliente(status, id) {
             }
         }),
     }).done((res) => {
-        console.log(res);
+        ;
         if (res.err != undefined) {
             // show erro
             $.toast({
@@ -501,12 +532,12 @@ function getPrestadores() {
         method: 'GET',
         contentType: 'application/JSON'
     }).done(res => {
-        console.log(res)
+        
         let prestadores = res.prestadores;
         if (res.err == undefined) {
             $("#linhasPrestadores").html('');
             var button;
-            if (prestadores.length > 0) {
+            if (prestadores != null && prestadores.length > 0) {
                 prestadores.map(prestador => {
 
                     if (prestador.usuario_status == 1) {
@@ -592,7 +623,7 @@ function showChangeStatusPrestador(status, id) {
             }
         }),
     }).done((res) => {
-        console.log(res);
+        
         if (res.err != undefined) {
             // show erro
             $.toast({
@@ -674,7 +705,7 @@ function setPrestador() {
                 dados.push($(this).val().trim());
             }
         });
-        console.log(dados);
+        
         let url = baseUri + "/registerPrestador";
         let data = {
             usuario: {
@@ -702,7 +733,7 @@ function setPrestador() {
             contentType: "application/JSON",
             data: JSON.stringify(data),
         }).done((res) => {
-            console.log(res);
+            
             if (res.err != undefined) {
                 // show erro
                 $.toast({
@@ -741,11 +772,11 @@ function getBlog() {
         method: 'GET',
         contentType: 'application/JSON'
     }).done(res => {
-        console.log(res)
+        
         let blogs = res.blogs;
         if (res.err == undefined) {
             $("#linhasBlog").html('');
-            if (blogs.length > 0) {
+            if (blogs != null && blogs.length > 0) {
                 blogs.map(blog => {
                     $("#linhasBlog").append(`
                     <tr>
